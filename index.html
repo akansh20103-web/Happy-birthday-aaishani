@@ -14,15 +14,31 @@
           href="style.css">
 
 </head>
-<audio id="bgMusic" loop preload="auto">
-    <source src="daydreams.mp3" type="audio/mpeg">
-</audio>
 
-<button id="musicToggle" class="music-toggle" onclick="toggleMusic()">
-    🎵
-</button>
 
 <body>
+
+
+    <!-- ================================
+         BACKGROUND MUSIC
+    ================================= -->
+
+    <audio id="bgMusic" loop preload="auto">
+
+        <source src="daydreams.mp3"
+                type="audio/mpeg">
+
+    </audio>
+
+
+    <button id="musicToggle"
+            class="music-toggle"
+            onclick="toggleMusic()">
+
+        🎵
+
+    </button>
+
 
 
     <!-- ================================
@@ -47,9 +63,13 @@
             </h1>
 
             <p class="lock-message">
+
                 Only one special person can open it. ❤️
+
                 <br>
+
                 Enter your birthday to unlock.
+
             </p>
 
 
@@ -116,12 +136,19 @@
             </h1>
 
             <p class="opening-subtitle">
+
                 A story about you,
+
                 <br>
+
                 me,
+
                 <br>
+
                 and everything in between. ❤️
+
             </p>
+
 
             <button class="open-book-btn"
                     onclick="openBook()">
@@ -143,7 +170,10 @@
     <main class="book-container">
 
 
-        <!-- PAGE 1 -->
+
+        <!-- ================================
+             PAGE 1
+        ================================= -->
 
         <section class="page">
 
@@ -154,23 +184,32 @@
                 </p>
 
                 <h1>
+
                     To the girl
+
                     <br>
+
                     who became my world
+
                 </h1>
 
                 <div class="divider"></div>
 
                 <p>
+
                     This little book is for
+
                     <span class="highlight">
                         you.
                     </span>
+
                 </p>
 
                 <p>
+
                     Every page holds a tiny piece
                     of what you mean to me.
+
                 </p>
 
             </div>
@@ -192,7 +231,9 @@
 
 
 
-        <!-- PAGE 2 -->
+        <!-- ================================
+             PAGE 2
+        ================================= -->
 
         <section class="page">
 
@@ -209,19 +250,25 @@
                 <div class="divider"></div>
 
                 <p>
+
                     Somewhere along the way,
                     you stopped being just
                     another person in my life...
+
                 </p>
 
                 <p>
+
                     You became the person
                     I looked forward to.
+
                 </p>
 
                 <p class="script">
+
                     And somehow,
                     everything felt different.
+
                 </p>
 
             </div>
@@ -241,38 +288,154 @@
 
         </button>
 
- <!-- page 3 -->
-
-        <div class="memory-message">
-
-    <h2>
-        What are you looking at? 😂
-    </h2>
-
-    <p>
-        Oh… my favourite moments with you. ❤️
-    </p>
-
-    <p>
-        Every single second I spend with you is my favourite.
-    </p>
-
-    <p>
-        Everything about you is my favourite.
-    </p>
-
-    <p>
-        And honestly, I can't confine it to just five pictures.
-    </p>
-
-    <p>
-        It would take an entire millennium to even write half of it. 😘
-    </p>
-
-</div>
 
 
-        <!-- PAGE 4 -->
+        <!-- ================================
+             PAGE 3
+        ================================= -->
+
+        <section class="page">
+
+            <div class="page-content">
+
+                <p class="chapter">
+                    Chapter Three
+                </p>
+
+                <h1>
+                    My favorite memories
+                </h1>
+
+
+                <div class="photo-grid">
+
+
+                    <!-- PHOTO 1 -->
+
+                    <div class="photo-card">
+
+                        <div class="blank-photo"></div>
+
+                        <p>
+                            The moment I'll always remember.
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- PHOTO 2 -->
+
+                    <div class="photo-card">
+
+                        <div class="blank-photo"></div>
+
+                        <p>
+                            One of my favorite moments.
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- PHOTO 3 -->
+
+                    <div class="photo-card">
+
+                        <div class="blank-photo"></div>
+
+                        <p>
+                            A memory that still makes me smile.
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- PHOTO 4 -->
+
+                    <div class="photo-card">
+
+                        <div class="blank-photo"></div>
+
+                        <p>
+                            Just another beautiful memory.
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- PHOTO 5 -->
+
+                    <div class="photo-card">
+
+                        <div class="blank-photo"></div>
+
+                        <p>
+                            A little moment worth keeping forever.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- MEMORY MESSAGE -->
+
+                <div class="memory-message">
+
+                    <h2>
+                        What are you looking at? 😂
+                    </h2>
+
+                    <p>
+                        Oh… my favourite moments with you. ❤️
+                    </p>
+
+                    <p>
+                        Every single second I spend with you is my favourite.
+                    </p>
+
+                    <p>
+                        Everything about you is my favourite.
+                    </p>
+
+                    <p>
+                        And honestly, I can't confine it to just five pictures.
+                    </p>
+
+                    <p>
+                        It would take an entire millennium to even write half of it. 😘
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <button class="teddy-btn"
+                onclick="teddyTurnPage(this)">
+
+            <img src="teddy.gif"
+                 alt="Cute teddy">
+
+            <span>
+                Press me ❤️
+            </span>
+
+        </button>
+
+
+
+        <!-- ================================
+             PAGE 4
+        ================================= -->
 
         <section class="page">
 
@@ -313,8 +476,10 @@
                         </span>
 
                         <span>
+
                             The way you make
                             ordinary moments special.
+
                         </span>
 
                     </div>
@@ -328,8 +493,10 @@
                         </span>
 
                         <span>
+
                             The way you make me feel
                             understood.
+
                         </span>
 
                     </div>
@@ -370,7 +537,9 @@
 
 
 
-        <!-- PAGE 5 -->
+        <!-- ================================
+             PAGE 5
+        ================================= -->
 
         <section class="page">
 
@@ -387,13 +556,17 @@
                 <div class="divider"></div>
 
                 <p>
+
                     I'd run out of words
                     before I could even get close.
+
                 </p>
 
                 <p>
+
                     You're the kind of person
                     who makes life feel warmer.
+
                 </p>
 
                 <p class="script">
@@ -419,7 +592,9 @@
 
 
 
-        <!-- PAGE 6 -->
+        <!-- ================================
+             PAGE 6
+        ================================= -->
 
         <section class="page">
 
@@ -436,19 +611,25 @@
                 <div class="divider"></div>
 
                 <p>
+
                     Every conversation,
                     every laugh,
                     every little moment...
+
                 </p>
 
                 <p>
+
                     somehow became part
                     of my favorite memories.
+
                 </p>
 
                 <p class="script">
+
                     And I wouldn't trade
                     any of them.
+
                 </p>
 
             </div>
@@ -470,7 +651,9 @@
 
 
 
-        <!-- PAGE 7 -->
+        <!-- ================================
+             PAGE 7
+        ================================= -->
 
         <section class="page">
 
@@ -499,9 +682,11 @@
                 </p>
 
                 <p class="script">
+
                     Simply...
                     a lot.
                     ❤️
+
                 </p>
 
             </div>
@@ -523,7 +708,9 @@
 
 
 
-        <!-- PAGE 8 -->
+        <!-- ================================
+             PAGE 8
+        ================================= -->
 
         <section class="page">
 
@@ -540,15 +727,19 @@
                 <div class="divider"></div>
 
                 <p>
+
                     I'll keep choosing you
                     through the good days,
                     the difficult days,
                     and everything between.
+
                 </p>
 
                 <p>
+
                     I'll keep making memories
                     with you.
+
                 </p>
 
                 <p class="script">
@@ -574,7 +765,9 @@
 
 
 
-        <!-- PAGE 9 -->
+        <!-- ================================
+             PAGE 9
+        ================================= -->
 
         <section class="page">
 
@@ -591,13 +784,17 @@
                 <div class="divider"></div>
 
                 <p>
+
                     There's one more thing
                     I need to ask you.
+
                 </p>
 
                 <p>
+
                     Something I've secretly
                     imagined for a long time.
+
                 </p>
 
                 <p class="script">
@@ -623,7 +820,9 @@
 
 
 
-        <!-- PAGE 10 -->
+        <!-- ================================
+             PAGE 10
+        ================================= -->
 
         <section class="page question-page">
 
@@ -638,37 +837,54 @@
                 </div>
 
                 <p class="question-intro">
+
                     There's something I've wanted
                     to ask you...
+
                 </p>
 
                 <div class="question">
+
                     Will you break up with me...
+
                 </div>
 
                 <p class="question-text">
+
                     Not because I stopped loving you.
+
                     <br>
+
                     But because I want our story
                     to become something even
                     more beautiful.
+
                 </p>
 
                 <div class="final-question">
+
                     ...and become my wife instead? ❤️
+
                 </div>
 
                 <p class="question-text">
+
                     I know we still have so much
                     life ahead of us.
+
                     <br><br>
+
                     But if I get to choose
                     who I spend it with...
+
                     <br>
+
                     <strong>
                         I'd choose you.
                     </strong>
+
                     ❤️
+
                 </p>
 
             </div>
@@ -688,61 +904,82 @@
 
         </button>
 
-<!-- PAGE 11 -->
 
-<section class="page final-page">
-    
-    <div class="final-heart">
-        ♥
-    </div>
-    
-    <p class="final-whisper">
-        And if you ever wonder...
-    </p>
-    
-    <h1 class="final-title">
-        How much I love you
-    </h1>
-    
-    <div class="final-divider"></div>
-    
-    <p class="final-message">
-        There aren't enough words.
-        <br>
-        There aren't enough stars.
-        <br>
-        There isn't enough time.
-    </p>
-    
-    <p class="final-promise">
-        But if I had forever...
-        <br>
-        <strong>
-            I'd still choose you.
-        </strong>
-    </p>
-    
-    <div class="final-birthday">
-        Happy Birthday, Aaishani ❤️
-    </div>
-    
-    <div class="final-signature">
-        Forever yours,
-        <br>
-        
-        <span>
-            Shourya ❤️
-        </span>
-    </div>
-    
+
+        <!-- ================================
+             PAGE 11
+        ================================= -->
+
+        <section class="page final-page">
+
+            <div class="final-heart">
+                ♥
+            </div>
+
+            <p class="final-whisper">
+                And if you ever wonder...
+            </p>
+
+            <h1 class="final-title">
+                How much I love you
+            </h1>
+
+            <div class="final-divider"></div>
+
+            <p class="final-message">
+
+                There aren't enough words.
+
+                <br>
+
+                There aren't enough stars.
+
+                <br>
+
+                There isn't enough time.
+
+            </p>
+
+            <p class="final-promise">
+
+                But if I had forever...
+
+                <br>
+
+                <strong>
+                    I'd still choose you.
+                </strong>
+
+            </p>
+
+            <div class="final-birthday">
+
+                Happy Birthday, Aaishani ❤️
+
+            </div>
+
+            <div class="final-signature">
+
+                Forever yours,
+
+                <br>
+
+                <span>
+                    Shourya ❤️
+                </span>
+
+            </div>
 
 
 
             <!-- REPLAY BUTTON -->
 
-            <button class="restart-btn" onclick="restartBook()">
-    ↻ Read our story again ❤️
-</button>
+            <button class="restart-btn"
+                    onclick="restartBook()">
+
+                ↻ Read our story again ❤️
+
+            </button>
 
         </section>
 
@@ -751,9 +988,12 @@
 
 
 
-    <!-- JAVASCRIPT -->
+    <!-- ================================
+         JAVASCRIPT
+    ================================= -->
 
-    <script src="Main.js"></script>
+    <script src="main.js"></script>
+
 
 </body>
 
