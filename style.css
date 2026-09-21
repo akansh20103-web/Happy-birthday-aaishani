@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap');
 
-
 /* =========================
    COLORS
 ========================= */
@@ -33,7 +32,9 @@ html {
 
 body {
     min-height: 100vh;
+
     font-family: "Cormorant Garamond", serif;
+
     color: var(--ink);
 
     background:
@@ -55,6 +56,7 @@ body {
 .opening-screen {
     position: fixed;
     inset: 0;
+
     z-index: 9999;
 
     display: flex;
@@ -62,6 +64,7 @@ body {
     align-items: center;
 
     text-align: center;
+
     padding: 25px;
 
     background:
@@ -89,40 +92,56 @@ body {
 .opening-content {
     width: 100%;
     max-width: 500px;
+
     animation: openingFade 1.5s ease;
 }
 
 .opening-small {
     font-size: 20px;
     letter-spacing: 2px;
+
     margin-bottom: 15px;
+
     color: var(--rose);
 }
 
 .opening-title {
     font-family: "Great Vibes", cursive;
+
     font-size: clamp(65px, 16vw, 110px);
+
     color: var(--burgundy);
+
     line-height: 1;
+
     margin-bottom: 15px;
 }
 
 .opening-subtitle {
     font-size: 22px;
     line-height: 1.5;
+
     margin-bottom: 35px;
 }
 
+
+/* =========================
+   OPEN BUTTON
+========================= */
+
 .open-book-btn {
     border: none;
+
     padding: 15px 30px;
 
     border-radius: 50px;
 
     font-family: "Cormorant Garamond", serif;
+
     font-size: 20px;
 
     color: white;
+
     background: var(--burgundy);
 
     cursor: pointer;
@@ -153,14 +172,17 @@ body {
 
 .book-container {
     width: min(92%, 700px);
+
     margin: auto;
+
     padding: 40px 0 110px;
+
     perspective: 1500px;
 }
 
 
 /* =========================
-   PAGES
+   ALL PAGES
 ========================= */
 
 .page {
@@ -169,6 +191,7 @@ body {
     position: relative;
 
     width: 100%;
+
     min-height: 78vh;
 
     padding: clamp(35px, 7vw, 65px);
@@ -190,44 +213,37 @@ body {
         inset 0 0 40px rgba(130, 80, 70, 0.04);
 
     transform-origin: left center;
+
     backface-visibility: hidden;
-
-    opacity: 0;
-    visibility: hidden;
-
-    transform: scale(0.985);
-    filter: blur(3px);
-
-    transition:
-        opacity 1.2s ease,
-        transform 1.2s ease,
-        filter 1.2s ease,
-        visibility 0s linear 1.2s;
 }
+
+
+/*
+   ONLY ACTIVE PAGE IS VISIBLE
+*/
 
 .page.active {
     display: block !important;
 
-    opacity: 1;
-    visibility: visible;
-
-    transform: scale(1);
-    filter: blur(0);
-
     animation: pageTurn 0.8s ease;
 
-    transition:
-        opacity 1.2s ease,
-        transform 1.2s ease,
-        filter 1.2s ease,
-        visibility 0s linear 0s;
+    transform-origin: left center;
 }
+
+
+/* =========================
+   PAGE CONTENT
+========================= */
 
 .page-content {
     position: relative;
     z-index: 2;
 }
 
+
+/* =========================
+   PAGE TURN
+========================= */
 
 @keyframes pageTurn {
 
@@ -270,6 +286,7 @@ body {
     font-size: 35px;
 
     color: var(--rose-light);
+
     opacity: 0.5;
 
     pointer-events: none;
@@ -279,6 +296,7 @@ body {
     content: "";
 
     position: absolute;
+
     inset: 15px;
 
     border:
@@ -291,7 +309,7 @@ body {
 
 
 /* =========================
-   TEXT
+   CHAPTER LABEL
 ========================= */
 
 .chapter {
@@ -299,6 +317,7 @@ body {
     z-index: 2;
 
     font-size: 18px !important;
+
     letter-spacing: 2px;
 
     text-transform: uppercase;
@@ -307,6 +326,11 @@ body {
 
     margin-bottom: 12px !important;
 }
+
+
+/* =========================
+   HEADINGS
+========================= */
 
 .page h1 {
     position: relative;
@@ -340,6 +364,11 @@ body {
     margin-bottom: 20px;
 }
 
+
+/* =========================
+   TEXT
+========================= */
+
 .page p {
     position: relative;
     z-index: 2;
@@ -357,11 +386,13 @@ body {
 
 .page .small-text {
     font-size: 17px;
+
     opacity: 0.75;
 }
 
 .highlight {
     color: var(--burgundy);
+
     font-weight: 600;
 }
 
@@ -372,6 +403,11 @@ body {
 
     font-size: 1.35em;
 }
+
+
+/* =========================
+   DIVIDER
+========================= */
 
 .divider {
     width: 90px;
@@ -385,15 +421,16 @@ body {
 }
 
 
-/* =========================
-   CHAPTER 3 PHOTO GRID
-========================= */
+/* =========================================================
+   CHAPTER 3 — MEMORY PHOTO REVEAL
+========================================================= */
 
 .photo-grid {
     position: relative;
     z-index: 2;
 
     width: 100%;
+
     min-height: 560px;
 
     margin-top: 30px;
@@ -401,10 +438,15 @@ body {
     display: flex;
 
     justify-content: center;
+
     align-items: flex-start;
 }
 
+
+/* Each photo starts hidden */
+
 .photo-grid .photo-card {
+
     position: absolute;
 
     top: 15px;
@@ -432,31 +474,72 @@ body {
 
     pointer-events: none;
 }
-
-
 /* =========================
-   BLANK PHOTO
+   CHAPTER 3 MEMORY MESSAGE
 ========================= */
 
-.blank-photo {
-    width: 100%;
-
-    aspect-ratio: 1 / 1;
-
-    display: block;
-
-    background:
-        linear-gradient(
-            135deg,
-            #f1e2dc,
-            #ead3d0
-        );
-
-    border:
-        1px solid rgba(183, 110, 121, 0.15);
+.memory-message {
+    
+    position: relative;
+    
+    z-index: 10;
+    
+    opacity: 0;
+    
+    transform:
+        translateY(15px);
+    
+    text-align: center;
+    
+    margin:
+        25px auto 0;
+    
+    max-width: 570px;
+    
+    transition:
+        opacity 2s ease,
+        transform 2s ease;
 }
 
+.memory-message.show-message {
+    
+    opacity: 1;
+    
+    transform:
+        translateY(0);
+}
+
+.memory-message h2 {
+    
+    font-family:
+        "Cormorant Garamond", serif;
+    
+    font-size:
+        clamp(25px, 6vw, 32px);
+    
+    color:
+        var(--rose);
+    
+    margin-bottom:
+        15px;
+}
+
+.memory-message p {
+    
+    font-size:
+        clamp(18px, 4.5vw, 22px);
+    
+    line-height:
+        1.6;
+    
+    margin:
+        10px auto;
+}
+
+/* Images */
+
 .photo-card img {
+
     width: 100%;
 
     aspect-ratio: 1 / 1;
@@ -466,18 +549,34 @@ body {
     display: block;
 }
 
+
+/* Photo captions */
+
 .photo-card p {
+
     font-size: 17px;
 
     margin: 10px 0 0;
+
 }
 
+
+/* Revealed photos stay visible */
+
 .photo-grid .photo-card.show-photo {
+
     opacity: 1;
+
     pointer-events: auto;
 }
 
+
+/* =========================
+   PHOTO 1
+========================= */
+
 .photo-grid .photo-card:nth-child(1).show-photo {
+
     transform:
         translate(-58%, 0)
         rotate(-5deg)
@@ -486,7 +585,13 @@ body {
     z-index: 1;
 }
 
+
+/* =========================
+   PHOTO 2
+========================= */
+
 .photo-grid .photo-card:nth-child(2).show-photo {
+
     transform:
         translate(-42%, 20px)
         rotate(5deg)
@@ -495,7 +600,13 @@ body {
     z-index: 2;
 }
 
+
+/* =========================
+   PHOTO 3
+========================= */
+
 .photo-grid .photo-card:nth-child(3).show-photo {
+
     transform:
         translate(-55%, 45px)
         rotate(-3deg)
@@ -504,7 +615,13 @@ body {
     z-index: 3;
 }
 
+
+/* =========================
+   PHOTO 4
+========================= */
+
 .photo-grid .photo-card:nth-child(4).show-photo {
+
     transform:
         translate(-40%, 65px)
         rotate(4deg)
@@ -513,53 +630,19 @@ body {
     z-index: 4;
 }
 
+
+/* =========================
+   PHOTO 5
+========================= */
+
 .photo-grid .photo-card:nth-child(5).show-photo {
+
     transform:
         translate(-50%, 85px)
         rotate(-2deg)
         scale(0.92);
 
     z-index: 5;
-}
-
-
-/* =========================
-   MEMORY MESSAGE
-========================= */
-
-.memory-message {
-    position: relative;
-    z-index: 10;
-
-    opacity: 0;
-
-    transform: translateY(15px);
-
-    text-align: center;
-
-    margin-top: 25px;
-
-    transition:
-        opacity 2s ease,
-        transform 2s ease;
-}
-
-.memory-message.show-message {
-    opacity: 1;
-
-    transform: translateY(0);
-}
-
-.memory-message h2 {
-    margin-bottom: 15px;
-}
-
-.memory-message p {
-    font-size: 19px;
-
-    line-height: 1.6;
-
-    margin: 10px auto;
 }
 
 
@@ -600,9 +683,9 @@ body {
 }
 
 
-/* =========================
-   QUESTION PAGE
-========================= */
+/* =========================================================
+   PAGE 10 — THE BIG QUESTION
+========================================================= */
 
 .page.question-page {
     display: none !important;
@@ -610,6 +693,7 @@ body {
     flex-direction: column;
 
     justify-content: center;
+
     align-items: center;
 
     text-align: center;
@@ -620,6 +704,9 @@ body {
 .page.question-page.active {
     display: flex !important;
 }
+
+
+/* Question page background glow */
 
 .page.question-page::before {
     content: "♡";
@@ -643,6 +730,9 @@ body {
         questionGlow 3s ease-in-out infinite;
 }
 
+
+/* Ring */
+
 .question-page .ring {
     position: relative;
     z-index: 3;
@@ -661,6 +751,9 @@ body {
         );
 }
 
+
+/* Introduction */
+
 .question-page .question-intro {
     position: relative;
     z-index: 3;
@@ -672,6 +765,9 @@ body {
     animation:
         questionFade 1s ease 0.5s forwards;
 }
+
+
+/* Main question */
 
 .question-page .question {
     position: relative;
@@ -693,6 +789,9 @@ body {
         questionReveal 1.2s ease 1s forwards;
 }
 
+
+/* Supporting text */
+
 .question-page .question-text {
     position: relative;
     z-index: 3;
@@ -704,6 +803,9 @@ body {
     animation:
         questionFade 1s ease 1.8s forwards;
 }
+
+
+/* Final wife question */
 
 .question-page .final-question {
     position: relative;
@@ -741,17 +843,22 @@ body {
 
 
 /* =========================
-   QUESTION ANIMATIONS
+   PAGE 10 ANIMATIONS
 ========================= */
 
 @keyframes questionGlow {
 
-    0%, 100% {
-        transform: translateX(-50%) scale(1);
+    0%,
+    100% {
+        transform:
+            translateX(-50%)
+            scale(1);
     }
 
     50% {
-        transform: translateX(-50%) scale(1.12);
+        transform:
+            translateX(-50%)
+            scale(1.12);
     }
 }
 
@@ -840,9 +947,9 @@ body {
 }
 
 
-/* =========================
-   FINAL PAGE
-========================= */
+/* =========================================================
+   PAGE 11 — CINEMATIC FINAL PAGE
+========================================================= */
 
 .page.final-page {
     display: none !important;
@@ -874,6 +981,9 @@ body {
         finalPageReveal 1.5s ease;
 }
 
+
+/* Final page glow */
+
 .final-page::before {
     content: "";
 
@@ -903,6 +1013,9 @@ body {
         finalGlow 4s ease-in-out 0.8s infinite;
 }
 
+
+/* Final heart */
+
 .final-heart {
     position: relative;
     z-index: 3;
@@ -923,6 +1036,9 @@ body {
         );
 }
 
+
+/* Final whisper */
+
 .final-whisper {
     position: relative;
     z-index: 3;
@@ -941,6 +1057,9 @@ body {
         finalTextReveal 1s ease 1.2s forwards;
 }
 
+
+/* Final title */
+
 .final-title {
     position: relative;
     z-index: 3;
@@ -955,6 +1074,9 @@ body {
     animation:
         finalTitleReveal 1.3s ease 1.7s forwards;
 }
+
+
+/* Final divider */
 
 .final-divider {
     position: relative;
@@ -971,6 +1093,9 @@ body {
         dividerReveal 1.2s ease 2.7s forwards;
 }
 
+
+/* Final message */
+
 .final-message {
     position: relative;
     z-index: 3;
@@ -984,6 +1109,9 @@ body {
     animation:
         finalTextReveal 1.2s ease 3s forwards;
 }
+
+
+/* Promise */
 
 .final-promise {
     position: relative;
@@ -1009,6 +1137,9 @@ body {
     font-weight: 400;
 }
 
+
+/* Birthday */
+
 .final-birthday {
     position: relative;
     z-index: 3;
@@ -1025,11 +1156,15 @@ body {
 
     opacity: 0;
 
-    transform: scale(0.85);
+    transform:
+        scale(0.85);
 
     animation:
         birthdayReveal 1.5s ease 4.6s forwards;
 }
+
+
+/* Signature */
 
 .final-signature {
     position: relative;
@@ -1059,7 +1194,7 @@ body {
 
 
 /* =========================
-   FINAL ANIMATIONS
+   FINAL PAGE ANIMATIONS
 ========================= */
 
 @keyframes finalPageReveal {
@@ -1112,7 +1247,8 @@ body {
 
 @keyframes finalHeartPulse {
 
-    0%, 100% {
+    0%,
+    100% {
         transform: scale(1);
     }
 
@@ -1161,11 +1297,13 @@ body {
 
     from {
         width: 0;
+
         opacity: 0;
     }
 
     to {
         width: 90px;
+
         opacity: 0.7;
     }
 }
@@ -1199,7 +1337,8 @@ body {
 
 @keyframes finalGlow {
 
-    0%, 100% {
+    0%,
+    100% {
         opacity: 0.15;
 
         transform:
@@ -1260,14 +1399,16 @@ body {
 }
 
 .replay-btn:hover {
-    transform: translateY(-3px);
+    transform:
+        translateY(-3px);
 
     box-shadow:
         0 10px 25px rgba(104, 31, 50, 0.18);
 }
 
 .replay-btn:active {
-    transform: scale(0.94);
+    transform:
+        scale(0.94);
 }
 
 @keyframes replayReveal {
@@ -1300,7 +1441,8 @@ body {
     left: 50%;
     bottom: 20px;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
     z-index: 500;
 
@@ -1309,6 +1451,7 @@ body {
     display: flex;
 
     justify-content: space-between;
+
     align-items: center;
 
     padding: 12px 15px;
@@ -1345,7 +1488,8 @@ body {
 }
 
 .nav-btn:hover:not(:disabled) {
-    transform: scale(1.08);
+    transform:
+        scale(1.08);
 }
 
 .nav-btn:disabled {
@@ -1448,12 +1592,13 @@ body {
 
 
 /* =========================
-   RING / OPENING ANIMATIONS
+   OTHER ANIMATIONS
 ========================= */
 
 @keyframes ringPulse {
 
-    0%, 100% {
+    0%,
+    100% {
         transform: scale(1);
     }
 
@@ -1476,454 +1621,6 @@ body {
 
         transform:
             translateY(0);
-    }
-}
-
-
-/* =========================
-   TEDDY BUTTON
-========================= */
-
-.teddy-btn {
-    position: absolute;
-
-    right: 14px;
-    bottom: 14px;
-
-    width: 95px;
-
-    padding: 0;
-
-    border: none;
-
-    background: transparent;
-
-    cursor: pointer;
-
-    z-index: 50;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    transition:
-        transform 0.25s ease;
-}
-
-.teddy-btn img {
-    width: 75px;
-    height: 75px;
-
-    object-fit: cover;
-
-    border-radius: 18px;
-
-    filter:
-        drop-shadow(
-            0 5px 8px rgba(0,0,0,0.18)
-        );
-
-    transition:
-        transform 0.25s ease,
-        filter 0.25s ease;
-}
-
-.teddy-btn span {
-    margin-top: 3px;
-
-    font-family:
-        "Great Vibes", cursive;
-
-    font-size: 16px;
-
-    color: #681f32;
-
-    white-space: nowrap;
-}
-
-.teddy-btn:hover {
-    transform: translateY(-4px);
-}
-
-.teddy-btn:active {
-    transform: scale(0.9);
-}
-
-.teddy-btn.teddy-happy img {
-    animation:
-        teddyHappy 0.65s ease;
-}
-
-@keyframes teddyHappy {
-
-    0% {
-        transform: scale(1);
-    }
-
-    25% {
-        transform:
-            scale(0.88)
-            rotate(-5deg);
-    }
-
-    50% {
-        transform:
-            scale(1.12)
-            rotate(5deg);
-    }
-
-    75% {
-        transform:
-            scale(1.05)
-            rotate(-3deg);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-.teddy-heart {
-    position: fixed;
-
-    pointer-events: none;
-
-    z-index: 9999;
-
-    font-size: 18px;
-
-    animation:
-        teddyHeart 0.9s ease forwards;
-}
-
-@keyframes teddyHeart {
-
-    0% {
-        transform:
-            translate(0, 0)
-            scale(0.3);
-
-        opacity: 0;
-    }
-
-    30% {
-        opacity: 1;
-    }
-
-    100% {
-        transform:
-            translate(var(--x), var(--y))
-            scale(1.2);
-
-        opacity: 0;
-    }
-}
-
-
-/* =========================
-   BIRTHDAY LOCK
-========================= */
-
-.birthday-lock {
-    position: fixed;
-
-    inset: 0;
-
-    z-index: 9999;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    background:
-        radial-gradient(
-            circle at top,
-            rgba(255, 235, 238, 0.9),
-            transparent 55%
-        ),
-        #f8eee9;
-
-    text-align: center;
-
-    transition:
-        opacity 0.8s ease,
-        transform 0.8s ease;
-}
-
-.lock-content {
-    width: min(90%, 420px);
-
-    padding: 35px 24px;
-}
-
-.lock-icon {
-    font-size: 58px;
-
-    margin-bottom: 18px;
-
-    animation:
-        lockFloat 2.5s ease-in-out infinite;
-}
-
-.lock-small {
-    font-family:
-        "Cormorant Garamond", serif;
-
-    font-size: 17px;
-
-    letter-spacing: 1px;
-
-    margin-bottom: 8px;
-}
-
-.lock-content h1 {
-    font-family:
-        "Great Vibes", cursive;
-
-    font-size: 42px;
-
-    font-weight: normal;
-
-    margin:
-        8px 0 18px;
-}
-
-.lock-message {
-    font-family:
-        "Cormorant Garamond", serif;
-
-    font-size: 18px;
-
-    line-height: 1.6;
-
-    margin-bottom: 28px;
-}
-
-.date-inputs {
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    gap: 8px;
-
-    margin-bottom: 22px;
-}
-
-.date-inputs input {
-    width: 78px;
-    height: 52px;
-
-    border:
-        1px solid rgba(120, 70, 75, 0.3);
-
-    border-radius: 12px;
-
-    background:
-        rgba(255, 255, 255, 0.7);
-
-    text-align: center;
-
-    font-family:
-        "Cormorant Garamond", serif;
-
-    font-size: 19px;
-
-    outline: none;
-
-    transition: 0.3s ease;
-}
-
-.date-inputs input:focus {
-    border-color: #9b5b65;
-
-    transform:
-        translateY(-2px);
-}
-
-.date-inputs span {
-    font-size: 22px;
-}
-
-.unlock-btn {
-    border: none;
-
-    border-radius: 30px;
-
-    padding:
-        14px 25px;
-
-    background: #8d4f59;
-
-    color: white;
-
-    font-family:
-        "Cormorant Garamond", serif;
-
-    font-size: 17px;
-
-    cursor: pointer;
-
-    transition: 0.3s ease;
-}
-
-.unlock-btn:active {
-    transform: scale(0.95);
-}
-
-.lock-error {
-    min-height: 24px;
-
-    margin-top: 15px;
-
-    font-family:
-        "Cormorant Garamond", serif;
-
-    font-size: 16px;
-}
-
-.birthday-lock.unlocking {
-    opacity: 0;
-
-    transform:
-        scale(1.08);
-
-    pointer-events: none;
-}
-
-.birthday-lock.wrong .lock-content {
-    animation:
-        shakeLock 0.4s ease;
-}
-
-@keyframes shakeLock {
-
-    0%, 100% {
-        transform: translateX(0);
-    }
-
-    25% {
-        transform: translateX(-8px);
-    }
-
-    50% {
-        transform: translateX(8px);
-    }
-
-    75% {
-        transform: translateX(-5px);
-    }
-}
-
-@keyframes lockFloat {
-
-    0%, 100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-7px);
-    }
-}
-
-
-/* =========================
-   RESTART
-========================= */
-
-.restart-btn {
-    margin-top: 25px;
-
-    border:
-        1px solid rgba(120, 70, 75, 0.35);
-
-    border-radius: 30px;
-
-    padding:
-        14px 25px;
-
-    background:
-        rgba(255, 255, 255, 0.55);
-
-    color: #6f3f47;
-
-    font-family:
-        "Cormorant Garamond", serif;
-
-    font-size: 17px;
-
-    cursor: pointer;
-
-    transition:
-        all 0.4s ease;
-}
-
-.restart-btn:active {
-    transform: scale(0.92);
-}
-
-.restart-btn:hover {
-    transform: translateY(-3px);
-}
-
-
-/* =========================
-   MUSIC
-========================= */
-
-.music-toggle {
-    position: fixed;
-
-    right: 18px;
-    bottom: 18px;
-
-    width: 48px;
-    height: 48px;
-
-    border:
-        1px solid rgba(120, 70, 75, 0.25);
-
-    border-radius: 50%;
-
-    background:
-        rgba(255, 255, 255, 0.75);
-
-    backdrop-filter: blur(8px);
-
-    color: #6f3f47;
-
-    font-size: 20px;
-
-    cursor: pointer;
-
-    z-index: 5000;
-
-    box-shadow:
-        0 6px 20px rgba(100, 50, 60, 0.12);
-
-    transition: 0.3s ease;
-}
-
-.music-toggle:active {
-    transform: scale(0.88);
-}
-
-.music-toggle.playing {
-    animation:
-        musicPulse 1.5s ease-in-out infinite;
-}
-
-@keyframes musicPulse {
-
-    0%, 100% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.08);
     }
 }
 
@@ -1954,15 +1651,23 @@ body {
         line-height: 1.65;
     }
 
+
+    /* Chapter 3 */
+
     .photo-grid {
+
         min-height: 500px;
 
         margin-top: 25px;
+
     }
 
     .photo-grid .photo-card {
+
         width: 78%;
+
     }
+
 
     .navigation {
         width: 94%;
@@ -1984,6 +1689,9 @@ body {
     .opening-small {
         font-size: 17px;
     }
+
+
+    /* PAGE 10 */
 
     .page.question-page {
         min-height: 76vh;
@@ -2022,6 +1730,9 @@ body {
         margin-top: 15px;
     }
 
+
+    /* FINAL PAGE */
+
     .final-page {
         padding:
             35px 22px;
@@ -2055,10 +1766,6 @@ body {
 
         margin-top: 15px;
     }
-
-    .memory-message p {
-        font-size: 18px;
-    }
 }
 
 
@@ -2081,13 +1788,21 @@ body {
         font-size: 18px;
     }
 
+
+    /* Chapter 3 */
+
     .photo-grid {
+
         min-height: 450px;
+
     }
 
     .photo-grid .photo-card {
+
         width: 82%;
+
     }
+
 
     .question {
         font-size: 45px;
@@ -2100,7 +1815,7 @@ body {
 
 
 /* =========================
-   REDUCED MOTION
+   REDUCE MOTION
 ========================= */
 
 @media (prefers-reduced-motion: reduce) {
@@ -2108,7 +1823,6 @@ body {
     *,
     *::before,
     *::after {
-
         animation-duration: 0.01ms !important;
 
         animation-iteration-count: 1 !important;
@@ -2117,4 +1831,582 @@ body {
 
         scroll-behavior: auto !important;
     }
+}
+
+
+/* =================================
+   TEDDY PAGE TURN BUTTON
+================================= */
+
+.teddy-btn {
+    position: absolute;
+
+    right: 14px;
+    bottom: 14px;
+
+    width: 95px;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    z-index: 50;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    transition:
+        transform 0.25s ease;
+}
+
+.teddy-btn img {
+
+    width: 75px;
+    height: 75px;
+
+    object-fit: cover;
+
+    border-radius: 18px;
+
+    filter:
+        drop-shadow(
+            0 5px 8px rgba(0,0,0,0.18)
+        );
+
+    transition:
+        transform 0.25s ease,
+        filter 0.25s ease;
+}
+
+.teddy-btn span {
+
+    margin-top: 3px;
+
+    font-family:
+        "Great Vibes", cursive;
+
+    font-size: 16px;
+
+    color: #681f32;
+
+    white-space: nowrap;
+}
+
+.teddy-btn:hover {
+    transform:
+        translateY(-4px);
+}
+
+.teddy-btn:active {
+    transform:
+        scale(0.9);
+}
+
+.teddy-btn.teddy-happy img {
+
+    animation:
+        teddyHappy 0.65s ease;
+}
+
+@keyframes teddyHappy {
+
+    0% {
+        transform: scale(1);
+    }
+
+    25% {
+        transform:
+            scale(0.88)
+            rotate(-5deg);
+    }
+
+    50% {
+        transform:
+            scale(1.12)
+            rotate(5deg);
+    }
+
+    75% {
+        transform:
+            scale(1.05)
+            rotate(-3deg);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+/* Tiny hearts around teddy */
+
+.teddy-heart {
+
+    position: fixed;
+
+    pointer-events: none;
+
+    z-index: 9999;
+
+    font-size: 18px;
+
+    animation:
+        teddyHeart 0.9s ease forwards;
+}
+
+@keyframes teddyHeart {
+
+    0% {
+        transform:
+            translate(0, 0)
+            scale(0.3);
+
+        opacity: 0;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translate(var(--x), var(--y))
+            scale(1.2);
+
+        opacity: 0;
+    }
+}
+
+
+/* ================================
+   BIRTHDAY LOCK
+================================ */
+
+.birthday-lock {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at top,
+            rgba(255, 235, 238, 0.9),
+            transparent 55%
+        ),
+        #f8eee9;
+
+    text-align: center;
+
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+.lock-content {
+
+    width: min(90%, 420px);
+
+    padding:
+        35px 24px;
+}
+
+.lock-icon {
+
+    font-size: 58px;
+
+    margin-bottom: 18px;
+
+    animation:
+        lockFloat 2.5s ease-in-out infinite;
+}
+
+.lock-small {
+
+    font-family:
+        "Cormorant Garamond", serif;
+
+    font-size: 17px;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 8px;
+}
+
+.lock-content h1 {
+
+    font-family:
+        "Great Vibes", cursive;
+
+    font-size: 42px;
+
+    font-weight: normal;
+
+    margin:
+        8px 0 18px;
+}
+
+.lock-message {
+
+    font-family:
+        "Cormorant Garamond", serif;
+
+    font-size: 18px;
+
+    line-height: 1.6;
+
+    margin-bottom: 28px;
+}
+
+.date-inputs {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-bottom: 22px;
+}
+
+.date-inputs input {
+
+    width: 78px;
+
+    height: 52px;
+
+    border:
+        1px solid rgba(120, 70, 75, 0.3);
+
+    border-radius: 12px;
+
+    background:
+        rgba(255, 255, 255, 0.7);
+
+    text-align: center;
+
+    font-family:
+        "Cormorant Garamond", serif;
+
+    font-size: 19px;
+
+    outline: none;
+
+    transition: 0.3s ease;
+}
+
+.date-inputs input:focus {
+
+    border-color: #9b5b65;
+
+    transform:
+        translateY(-2px);
+}
+
+.date-inputs span {
+
+    font-size: 22px;
+}
+
+.unlock-btn {
+
+    border: none;
+
+    border-radius: 30px;
+
+    padding:
+        14px 25px;
+
+    background: #8d4f59;
+
+    color: white;
+
+    font-family:
+        "Cormorant Garamond", serif;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+.unlock-btn:active {
+
+    transform:
+        scale(0.95);
+}
+
+.lock-error {
+
+    min-height: 24px;
+
+    margin-top: 15px;
+
+    font-family:
+        "Cormorant Garamond", serif;
+
+    font-size: 16px;
+}
+
+
+/* Unlock animation */
+
+.birthday-lock.unlocking {
+
+    opacity: 0;
+
+    transform:
+        scale(1.08);
+
+    pointer-events: none;
+}
+
+.birthday-lock.wrong .lock-content {
+
+    animation:
+        shakeLock 0.4s ease;
+}
+
+@keyframes shakeLock {
+
+    0%,
+    100% {
+        transform:
+            translateX(0);
+    }
+
+    25% {
+        transform:
+            translateX(-8px);
+    }
+
+    50% {
+        transform:
+            translateX(8px);
+    }
+
+    75% {
+        transform:
+            translateX(-5px);
+    }
+
+}
+
+@keyframes lockFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-7px);
+    }
+
+}
+
+
+/* ================================
+   RESTART BUTTON
+================================ */
+
+.restart-btn {
+
+    margin-top: 25px;
+
+    border:
+        1px solid rgba(120, 70, 75, 0.35);
+
+    border-radius: 30px;
+
+    padding:
+        14px 25px;
+
+    background:
+        rgba(255, 255, 255, 0.55);
+
+    color: #6f3f47;
+
+    font-family:
+        "Cormorant Garamond", serif;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+    transition:
+        all 0.4s ease;
+}
+
+.restart-btn:active {
+
+    transform:
+        scale(0.92);
+}
+
+.restart-btn:hover {
+
+    transform:
+        translateY(-3px);
+}
+
+
+/* ================================
+   MUSIC BUTTON
+================================ */
+
+.music-toggle {
+
+    position: fixed;
+
+    right: 18px;
+
+    bottom: 18px;
+
+    width: 48px;
+
+    height: 48px;
+
+    border:
+        1px solid rgba(120, 70, 75, 0.25);
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.75);
+
+    backdrop-filter:
+        blur(8px);
+
+    color: #6f3f47;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    z-index: 5000;
+
+    box-shadow:
+        0 6px 20px rgba(100, 50, 60, 0.12);
+
+    transition:
+        0.3s ease;
+}
+
+.music-toggle:active {
+
+    transform:
+        scale(0.88);
+}
+
+.music-toggle.playing {
+
+    animation:
+        musicPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes musicPulse {
+
+    0%,
+    100% {
+        transform:
+            scale(1);
+    }
+
+    50% {
+        transform:
+            scale(1.08);
+    }
+
+}
+
+
+/* ================================
+   SOFT PAGE DISSOLVE
+================================ */
+
+.page {
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform:
+        scale(0.985);
+
+    filter:
+        blur(3px);
+
+    transition:
+        opacity 1.2s ease,
+        transform 1.2s ease,
+        filter 1.2s ease,
+        visibility 0s linear 1.2s;
+}
+
+.page.active {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform:
+        scale(1);
+
+    filter:
+        blur(0);
+
+    transition:
+        opacity 1.2s ease,
+        transform 1.2s ease,
+        filter 1.2s ease,
+        visibility 0s linear 0s;
+}
+/* =========================
+   GITHUB / MOBILE SAFETY
+========================= */
+
+img {
+    max-width: 100%;
+}
+
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 600px) {
+    
+    .memory-message {
+        margin-top: 20px;
+        padding-bottom: 30px;
+    }
+    
+    .memory-message p {
+        font-size: 18px;
+        line-height: 1.55;
+    }
+    
+    .memory-message h2 {
+        font-size: 27px;
+    }
+    
 }
