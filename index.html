@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>For Aaishani ❤️</title>
+
+    <link rel="stylesheet"
+          href="style.css">
+
+</head>
+<audio id="bgMusic" loop preload="auto">
+    <source src="daydreams.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicToggle" class="music-toggle" onclick="toggleMusic()">
+    🎵
+</button>
+
+<body>
+
+
+    <!-- ================================
+         BIRTHDAY LOCK
+    ================================= -->
+
+    <div class="birthday-lock"
+         id="birthdayLock">
+
+        <div class="lock-content">
+
+            <div class="lock-icon">
+                🔐
+            </div>
+
+            <p class="lock-small">
+                A little secret is waiting...
+            </p>
+
+            <h1>
+                This book is locked
+            </h1>
+
+            <p class="lock-message">
+                Only one special person can open it. ❤️
+                <br>
+                Enter your birthday to unlock.
+            </p>
+
+
+            <div class="date-inputs">
+
+                <input type="number"
+                       id="birthDay"
+                       placeholder="DD"
+                       min="1"
+                       max="31">
+
+                <span>/</span>
+
+                <input type="number"
+                       id="birthMonth"
+                       placeholder="MM"
+                       min="1"
+                       max="12">
+
+                <span>/</span>
+
+                <input type="number"
+                       id="birthYear"
+                       placeholder="YYYY"
+                       min="1900"
+                       max="2100">
+
+            </div>
+
+
+            <button class="unlock-btn"
+                    onclick="unlockBook()">
+
+                🔓 Unlock my book
+
+            </button>
+
+
+            <p class="lock-error"
+               id="lockError">
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================
+         OPENING SCREEN
+    ================================= -->
+
+    <div class="opening-screen"
+         id="openingScreen">
+
+        <div class="opening-content">
+
+            <p class="opening-small">
+                A little book made with love
+            </p>
+
+            <h1 class="opening-title">
+                Aaishani
+            </h1>
+
+            <p class="opening-subtitle">
+                A story about you,
+                <br>
+                me,
+                <br>
+                and everything in between. ❤️
+            </p>
+
+            <button class="open-book-btn"
+                    onclick="openBook()">
+
+                Open the book ❤️
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================================
+         BOOK
+    ================================= -->
+
+    <main class="book-container">
+
+
+        <!-- PAGE 1 -->
+
+        <section class="page">
+
+            <div class="page-content">
+
+                <p class="chapter">
+                    Chapter One
+                </p>
+
+                <h1>
+                    To the girl
+                    <br>
+                    who became my world
+                </h1>
+
+                <div class="divider"></div>
+
+                <p>
+                    This little book is for
+                    <span class="highlight">
+                        you.
+                    </span>
+                </p>
+
+                <p>
+                    Every page holds a tiny piece
+                    of what you mean to me.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <button class="teddy-btn"
+                onclick="teddyTurnPage(this)">
+
+            <img src="teddy.gif"
+                 alt="Cute teddy">
+
+            <span>
+                Press me ❤️
+            </span>
+
+        </button>
+
+
+
+        <!-- PAGE 2 -->
+
+        <section class="page">
+
+            <div class="page-content">
+
+                <p class="chapter">
+                    Chapter Two
+                </p>
+
+                <h1>
+                    The beginning
+                </h1>
+
+                <div class="divider"></div>
+
+                <p>
+                    Somewhere along the way,
+                    you stopped being just
+                    another person in my life...
+                </p>
+
+                <p>
+                    You became the person
+                    I looked forward to.
+                </p>
+
+                <p class="script">
+                    And somehow,
+                    everything felt different.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <button class="teddy-btn"
+                onclick="teddyTurnPage(this)">
+
+            <img src="teddy.gif"
+                 alt="Cute teddy">
+
+            <span>
+                Press me ❤️
+            </span>
+
+        </button>
+
+
+
+        <!-- PAGE 3 -->
+
+        <section class="page">
+
+            <div class="page-content">
+
+                <p class="chapter">
+                    Chapter Three
+                </p>
+
+                <h1>
+                    My favorite memories
+                </h1>
+
+
+                <div class="photo-grid">
+
+
+                    <div class="photo-card">
+<img src="images/chapter3-1.jpg" alt="A favorite memory">
+
+                        <p>
+                            The moment I'll always remember.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="photo-card">
+                        <img src="images/chapter3-2.jpg" alt="Another favorite memory">
+
+                        <p>
+                            One of my favorite moments.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="photo-card">
+
+   <img src="images/chapter3-3.jpg" alt="A memory that still makes me smile">
+
+                        <p>
+                            A memory that still makes me smile.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="photo-card">
+<img src="images/chapter3-4.jpg" alt="Just another beautiful memory">
+
+                        <p>
+                            Just another beautiful memory.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="photo-card">
+
+<img src="images/chapter3-5.jpg" alt="A little moment worth keeping forever">
+
+                        <p>
+                            A little moment worth keeping forever.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <button class="teddy-btn"
+                onclick="teddyTurnPage(this)">
+
+            <img src="teddy.gif"
+                 alt="Cute teddy">
+
+            <span>
+                Press me ❤️
+            </span>
+
+        </button>
+
+
+
+        <!-- PAGE 4 -->
+
+        <section class="page">
+
+            <div class="page-content">
+
+                <p class="chapter">
+                    Chapter Four
+                </p>
+
+                <h1>
+                    Things I love about you
+                </h1>
+
+                <div class="divider"></div>
+
+
+                <div class="reasons">
+
+
+                    <div class="reason">
+
+                        <span class="reason-number">
+                            01
+                        </span>
+
+                        <span>
+                            Your smile.
+                        </span>
+
+                    </div>
+
+
+
+                    <div class="reason">
+
+                        <span class="reason-number">
+                            02
+                        </span>
+
+                        <span>
+                            The way you make
+                            ordinary moments special.
+                        </span>
+
+                    </div>
+
+
+
+                    <div class="reason">
+
+                        <span class="reason-number">
+                            03
+                        </span>
+
+                        <span>
+                            The way you make me feel
+                            understood.
+                        </span>
+
+                    </div>
+
+
+
+                    <div class="reason">
+
+                        <span class="reason-number">
+                            04
+                        </span>
+
+                        <span>
+                            Simply being you.
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <button class="teddy-btn"
+                onclick="teddyTurnPage(this)">
+
+            <img src="teddy.gif"
+                 alt="Cute teddy">
+
+            <span>
+                Press me ❤️
+            </span>
+
+        </button>
+
+
+
+        <!-- PAGE 5 -->
+
+        <section class="page">
+
+            <div class="page-content">
+
+                <p class="chapter">
+                    Chapter Five
+                </p>
+
+                <h1>
+                    If I could describe you
+                </h1>
+
+                <div class="divider"></div>
+
+                <p>
+                    I'd run out of words
+                    before I could even get close.
+                </p>
+
+                <p>
+                    You're the kind of person
+                    who makes life feel warmer.
+                </p>
+
+                <p class="script">
+                    You feel like home.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <button class="teddy-btn"
+                onclick="teddyTurnPage(this)">
+
+            <img src="teddy.gif"
+                 alt="Cute teddy">
+
+            <span>
+                Press me ❤️
+            </span>
+
+        </button>
+
+
+
+        <!-- PAGE 6 -->
+
+        <section class="page">
+
+            <div class="page-content">
+
+                <p class="chapter">
+                    Chapter Six
+                </p>
+
+                <h1>
+                    The time we've shared
+                </h1>
+
+                <div class="divider"></div>
+
+                <p>
+                    Every conversation,
+                    every laugh,
+                    every little moment...
+                </p>
+
+                <p>
+                    somehow became part
+                    of my favorite memories.
+                </p>
+
+                <p class="script">
+                    And I wouldn't trade
+                    any of them.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <button class="teddy-btn"
+                onclick="teddyTurnPage(this)">
+
+            <img src="teddy.gif"
+                 alt="Cute teddy">
+
+            <span>
+                Press me ❤️
+            </span>
+
+        </button>
+
+
+
+        <!-- PAGE 7 -->
+
+        <section class="page">
+
+            <div class="page-content">
+
+                <p class="chapter">
+                    Chapter Seven
+                </p>
+
+                <h1>
+                    How much I love you
+                </h1>
+
+                <div class="divider"></div>
+
+                <p>
+                    More than I know how to explain.
+                </p>
+
+                <p>
+                    More than a number could measure.
+                </p>
+
+                <p>
+                    More than these pages could ever hold.
+                </p>
+
+                <p class="script">
+                    Simply...
+                    a lot.
+                    ❤️
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <button class="teddy-btn"
+                onclick="teddyTurnPage(this)">
+
+            <img src="teddy.gif"
+                 alt="Cute teddy">
+
+            <span>
+                Press me ❤️
+            </span>
+
+        </button>
+
+
+
+        <!-- PAGE 8 -->
+
+        <section class="page">
+
+            <div class="page-content">
+
+                <p class="chapter">
+                    Chapter Eight
+                </p>
+
+                <h1>
+                    A little promise
+                </h1>
+
+                <div class="divider"></div>
+
+                <p>
+                    I'll keep choosing you
+                    through the good days,
+                    the difficult days,
+                    and everything between.
+                </p>
+
+                <p>
+                    I'll keep making memories
+                    with you.
+                </p>
+
+                <p class="script">
+                    One day at a time.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <button class="teddy-btn"
+                onclick="teddyTurnPage(this)">
+
+            <img src="teddy.gif"
+                 alt="Cute teddy">
+
+            <span>
+                Press me ❤️
+            </span>
+
+        </button>
+
+
+
+        <!-- PAGE 9 -->
+
+        <section class="page">
+
+            <div class="page-content">
+
+                <p class="chapter">
+                    Chapter Nine
+                </p>
+
+                <h1>
+                    Before the ending...
+                </h1>
+
+                <div class="divider"></div>
+
+                <p>
+                    There's one more thing
+                    I need to ask you.
+                </p>
+
+                <p>
+                    Something I've secretly
+                    imagined for a long time.
+                </p>
+
+                <p class="script">
+                    Turn the page. ❤️
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <button class="teddy-btn"
+                onclick="teddyTurnPage(this)">
+
+            <img src="teddy.gif"
+                 alt="Cute teddy">
+
+            <span>
+                Press me ❤️
+            </span>
+
+        </button>
+
+
+
+        <!-- PAGE 10 -->
+
+        <section class="page question-page">
+
+            <div class="page-content">
+
+                <p class="chapter">
+                    Chapter Ten
+                </p>
+
+                <div class="ring">
+                    💍
+                </div>
+
+                <p class="question-intro">
+                    There's something I've wanted
+                    to ask you...
+                </p>
+
+                <div class="question">
+                    Will you break up with me...
+                </div>
+
+                <p class="question-text">
+                    Not because I stopped loving you.
+                    <br>
+                    But because I want our story
+                    to become something even
+                    more beautiful.
+                </p>
+
+                <div class="final-question">
+                    ...and become my wife instead? ❤️
+                </div>
+
+                <p class="question-text">
+                    I know we still have so much
+                    life ahead of us.
+                    <br><br>
+                    But if I get to choose
+                    who I spend it with...
+                    <br>
+                    <strong>
+                        I'd choose you.
+                    </strong>
+                    ❤️
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <button class="teddy-btn"
+                onclick="teddyTurnPage(this)">
+
+            <img src="teddy.gif"
+                 alt="Cute teddy">
+
+            <span>
+                Press me ❤️
+            </span>
+
+        </button>
+
+<!-- PAGE 11 -->
+
+<section class="page final-page">
+    
+    <div class="final-heart">
+        ♥
+    </div>
+    
+    <p class="final-whisper">
+        And if you ever wonder...
+    </p>
+    
+    <h1 class="final-title">
+        How much I love you
+    </h1>
+    
+    <div class="final-divider"></div>
+    
+    <p class="final-message">
+        There aren't enough words.
+        <br>
+        There aren't enough stars.
+        <br>
+        There isn't enough time.
+    </p>
+    
+    <p class="final-promise">
+        But if I had forever...
+        <br>
+        <strong>
+            I'd still choose you.
+        </strong>
+    </p>
+    
+    <div class="final-birthday">
+        Happy Birthday, Aaishani ❤️
+    </div>
+    
+    <div class="final-signature">
+        Forever yours,
+        <br>
+        
+        <span>
+            Shourya ❤️
+        </span>
+    </div>
+    
+
+
+
+            <!-- REPLAY BUTTON -->
+
+            <button class="restart-btn" onclick="restartBook()">
+    ↻ Read our story again ❤️
+</button>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="main.js"></script>
+
+</body>
+
+</html>
