@@ -1,3 +1,4 @@
+alert("Hime's JavaScript is working ❤️");
 let currentPage = 0;
 
 const pages = document.querySelectorAll(".page");
