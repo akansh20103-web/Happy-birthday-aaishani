@@ -1,4 +1,3 @@
-alert("Hime's JavaScript is working ❤️");
 let currentPage = 0;
 
 const pages = document.querySelectorAll(".page");
@@ -795,6 +794,23 @@ function restartBook() {
     });
 
 
+    /* Reset Chapter 3 message */
+
+    const memoryMessage =
+        document.querySelector(
+            ".memory-message"
+        );
+
+
+    if (memoryMessage) {
+
+        memoryMessage.classList.remove(
+            "show-message"
+        );
+
+    }
+
+
     /* Reset opening screen */
 
     openingScreen.classList.remove(
@@ -977,6 +993,23 @@ function startChapter3Slideshow() {
     });
 
 
+    /* Reset memory message */
+
+    const message =
+        document.querySelector(
+            ".memory-message"
+        );
+
+
+    if (message) {
+
+        message.classList.remove(
+            "show-message"
+        );
+
+    }
+
+
     let currentPhoto = 0;
 
 
@@ -1006,6 +1039,29 @@ function startChapter3Slideshow() {
                 );
 
                 chapter3Interval = null;
+
+
+                /* Wait 1 second after
+                   the fifth card appears */
+
+                setTimeout(() => {
+
+                    const memoryMessage =
+                        document.querySelector(
+                            ".memory-message"
+                        );
+
+
+                    if (memoryMessage) {
+
+                        memoryMessage.classList.add(
+                            "show-message"
+                        );
+
+                    }
+
+                }, 1000);
+
 
                 return;
 
