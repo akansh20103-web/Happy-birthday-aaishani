@@ -1,1082 +1,1016 @@
-let currentPage = 0;
+<!DOCTYPE html>
+<html lang="en">
 
-const pages = document.querySelectorAll(".page");
-const pageNumber = document.getElementById("pageNumber");
-const prevBtn = document.getElementById("prevBtn");
-const nextBtn = document.getElementById("nextBtn");
-const openingScreen = document.getElementById("openingScreen");
-const bgMusic = document.getElementById("bgMusic");
-const musicToggle = document.getElementById("musicToggle");
+<head>
 
-let particleInterval;
-let chapter3Interval = null;
+    <meta charset="UTF-8">
 
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-/* ================================
-   OPEN BOOK
-================================ */
+    <title>For Aaishani ❤️</title>
 
-function openBook() {
+    <link rel="stylesheet"
+          href="style.css">
 
-    openingScreen.classList.add("hidden");
+</head>
 
-    /* Start background music */
 
-    if (bgMusic) {
+<body>
 
-        bgMusic.volume = 0.35;
 
-        bgMusic.play()
-            .then(() => {
+    <!-- ================================
+         BACKGROUND MUSIC
+    ================================= -->
 
-                if (musicToggle) {
-                    musicToggle.classList.add("playing");
-                    musicToggle.textContent = "🎵";
-                }
+    <audio id="bgMusic"
+           loop
+           preload="auto">
 
-            })
-            .catch(() => {
+        <source src="daydreams.mp3"
+                type="audio/mpeg">
 
-                console.log("Music needs user interaction.");
+    </audio>
 
-            });
 
-    }
+    <button id="musicToggle"
+            class="music-toggle"
+            type="button"
+            onclick="toggleMusic()">
 
-    setTimeout(() => {
+        🎵
 
-        createHearts();
-        startFloatingParticles();
+    </button>
 
-    }, 700);
 
-}
 
+    <!-- ================================
+         BIRTHDAY LOCK
+    ================================= -->
 
-/* ================================
-   SHOW PAGE
-================================ */
+    <div class="birthday-lock"
+         id="birthdayLock">
 
-function showPage(index) {
+        <div class="lock-content">
 
-    if (index < 0 || index >= pages.length) {
-        return;
-    }
+            <div class="lock-icon">
+                🔐
+            </div>
 
-    const oldPage = pages[currentPage];
-    const newPage = pages[index];
+            <p class="lock-small">
+                A little secret is waiting...
+            </p>
 
+            <h1>
+                This book is locked
+            </h1>
 
-    /* First page — show immediately */
+            <p class="lock-message">
 
-    if (
-        currentPage === index &&
-        !newPage.classList.contains("active")
-    ) {
+                Only one special person can open it. ❤️
 
-        newPage.classList.add("active");
+                <br>
 
-        currentPage = index;
+                Enter your birthday to unlock.
 
-        updateNavigation();
+            </p>
 
-        return;
-    }
 
+            <div class="date-inputs">
 
-    if (oldPage === newPage) {
-        return;
-    }
+                <input type="number"
+                       id="birthDay"
+                       placeholder="DD"
+                       min="1"
+                       max="31">
 
+                <span>/</span>
 
-    /* Fade out old page */
+                <input type="number"
+                       id="birthMonth"
+                       placeholder="MM"
+                       min="1"
+                       max="12">
 
-    if (oldPage) {
-        oldPage.classList.remove("active");
-    }
+                <span>/</span>
 
+                <input type="number"
+                       id="birthYear"
+                       placeholder="YYYY"
+                       min="1900"
+                       max="2100">
 
-    /* Fade in new page */
+            </div>
 
-    setTimeout(() => {
 
-        newPage.classList.add("active");
+            <button class="unlock-btn"
+                    type="button"
+                    onclick="unlockBook()">
 
-        currentPage = index;
+                🔓 Unlock my book
 
-        updateNavigation();
+            </button>
 
 
-        /* ================================
-           CHAPTER 3 PHOTO REVEAL
-        ================================= */
+            <p class="lock-error"
+               id="lockError">
+            </p>
 
-        if (newPage.querySelector(".photo-grid")) {
+        </div>
 
-            startChapter3Slideshow();
+    </div>
 
-        }
 
 
-        /* ================================
-           FINAL PAGE EFFECTS
-        ================================= */
+    <!-- ================================
+         OPENING SCREEN
+    ================================= -->
 
-        if (index === pages.length - 1) {
+    <div class="opening-screen"
+         id="openingScreen">
 
-            setTimeout(() => {
+        <div class="opening-content">
 
-                createHeartExplosion();
+            <p class="opening-small">
+                A little book made with love
+            </p>
 
-                if (
-                    typeof createFinalPetals ===
-                    "function"
-                ) {
+            <h1 class="opening-title">
+                Aaishani
+            </h1>
 
-                    createFinalPetals();
+            <p class="opening-subtitle">
 
-                }
+                A story about you,
 
-            }, 800);
+                <br>
 
-        }
+                me,
 
+                <br>
 
-        window.scrollTo({
+                and everything in between. ❤️
 
-            top: 0,
+            </p>
 
-            behavior: "smooth"
 
-        });
+            <button class="open-book-btn"
+                    type="button"
+                    onclick="openBook()">
 
-    }, 450);
+                Open the book ❤️
 
-}
+            </button>
 
+        </div>
 
-/* ================================
-   NEXT PAGE
-================================ */
+    </div>
 
-function nextPage() {
 
-    if (currentPage < pages.length - 1) {
 
-        showPage(currentPage + 1);
+    <!-- ================================
+         BOOK
+    ================================= -->
 
-    } else {
+    <main class="book-container">
 
-        createHeartExplosion();
 
-    }
 
-}
+        <!-- ================================
+             PAGE 1
+        ================================= -->
 
+        <section class="page">
 
-/* ================================
-   PREVIOUS PAGE
-================================ */
+            <div class="page-content">
 
-function previousPage() {
+                <p class="chapter">
+                    Chapter One
+                </p>
 
-    if (currentPage > 0) {
+                <h1>
 
-        showPage(currentPage - 1);
+                    To the girl
 
-    }
+                    <br>
 
-}
+                    who became my world
 
+                </h1>
 
-/* ================================
-   NAVIGATION
-================================ */
+                <div class="divider"></div>
 
-function updateNavigation() {
+                <p>
 
-    if (pageNumber) {
+                    This little book is for
 
-        pageNumber.textContent =
-            `${currentPage + 1} / ${pages.length}`;
+                    <span class="highlight">
+                        you.
+                    </span>
 
-    }
+                </p>
 
-    if (prevBtn) {
+                <p>
 
-        prevBtn.disabled =
-            currentPage === 0;
+                    Every page holds a tiny piece
+                    of what you mean to me.
 
-    }
+                </p>
 
-    if (nextBtn) {
+            </div>
 
-        nextBtn.disabled =
-            currentPage === pages.length - 1;
+        </section>
 
-    }
 
-}
+        <button class="teddy-btn"
+                type="button"
+                onclick="teddyTurnPage(this)">
 
+            <img src="teddy.gif"
+                 alt="Cute teddy">
 
-/* ================================
-   KEYBOARD CONTROLS
-================================ */
+            <span>
+                Press me ❤️
+            </span>
 
-document.addEventListener("keydown", (event) => {
+        </button>
 
-    if (event.key === "ArrowRight") {
 
-        nextPage();
 
-    }
+        <!-- ================================
+             PAGE 2
+        ================================= -->
 
-    if (event.key === "ArrowLeft") {
+        <section class="page">
 
-        previousPage();
+            <div class="page-content">
 
-    }
+                <p class="chapter">
+                    Chapter Two
+                </p>
 
-});
+                <h1>
+                    The beginning
+                </h1>
 
+                <div class="divider"></div>
 
-/* ================================
-   SWIPE CONTROLS
-================================ */
+                <p>
 
-let touchStartX = 0;
-let touchEndX = 0;
+                    Somewhere along the way,
+                    you stopped being just
+                    another person in my life...
 
+                </p>
 
-document.addEventListener("touchstart", (event) => {
+                <p>
 
-    touchStartX =
-        event.changedTouches[0].screenX;
+                    You became the person
+                    I looked forward to.
 
-});
+                </p>
 
+                <p class="script">
 
-document.addEventListener("touchend", (event) => {
+                    And somehow,
+                    everything felt different.
 
-    touchEndX =
-        event.changedTouches[0].screenX;
+                </p>
 
-    handleSwipe();
+            </div>
 
-});
+        </section>
 
 
-function handleSwipe() {
+        <button class="teddy-btn"
+                type="button"
+                onclick="teddyTurnPage(this)">
 
-    const distance =
-        touchEndX - touchStartX;
+            <img src="teddy.gif"
+                 alt="Cute teddy">
 
-    if (Math.abs(distance) < 60) {
+            <span>
+                Press me ❤️
+            </span>
 
-        return;
+        </button>
 
-    }
 
-    if (distance < 0) {
 
-        nextPage();
+        <!-- ================================
+             PAGE 3
+        ================================= -->
 
-    } else {
+        <section class="page chapter-three-page">
 
-        previousPage();
+            <div class="page-content">
 
-    }
+                <p class="chapter">
+                    Chapter Three
+                </p>
 
-}
+                <h1>
+                    My favorite memories
+                </h1>
 
 
-/* ================================
-   FLOATING HEARTS
-================================ */
+                <div class="photo-grid">
 
-function createHearts() {
 
-    const heartCount = 18;
+                    <!-- PHOTO 1 -->
 
-    for (let i = 0; i < heartCount; i++) {
+                    <div class="photo-card">
 
-        setTimeout(() => {
+                        <img src="images/chapter3-1.jpg"
+                             alt="A favorite memory">
 
-            const heart =
-                document.createElement("div");
+                        <p>
+                            The moment I'll always remember.
+                        </p>
 
-            heart.innerHTML =
-                Math.random() > 0.5
-                    ? "♥"
-                    : "♡";
+                    </div>
 
-            heart.style.position = "fixed";
 
-            heart.style.left =
-                Math.random() * 100 + "vw";
 
-            heart.style.bottom = "-30px";
+                    <!-- PHOTO 2 -->
 
-            heart.style.fontSize =
-                Math.random() * 15 + 10 + "px";
+                    <div class="photo-card">
 
-            heart.style.color =
-                Math.random() > 0.5
-                    ? "#b76e79"
-                    : "#681f32";
+                        <img src="images/chapter3-2.jpg"
+                             alt="Another favorite memory">
 
-            heart.style.opacity = "0.7";
+                        <p>
+                            One of my favorite moments.
+                        </p>
 
-            heart.style.pointerEvents = "none";
+                    </div>
 
-            heart.style.zIndex = "999";
 
-            heart.style.transition =
-                "transform 5s linear, opacity 5s linear";
 
+                    <!-- PHOTO 3 -->
 
-            document.body.appendChild(heart);
+                    <div class="photo-card">
 
+                        <img src="images/chapter3-3.jpg"
+                             alt="A memory that still makes me smile">
 
-            setTimeout(() => {
+                        <p>
+                            A memory that still makes me smile.
+                        </p>
 
-                heart.style.transform =
-                    `translateY(-${window.innerHeight + 100}px)`;
+                    </div>
 
-                heart.style.opacity = "0";
 
-            }, 100);
 
+                    <!-- PHOTO 4 -->
 
-            setTimeout(() => {
+                    <div class="photo-card">
 
-                heart.remove();
+                        <img src="images/chapter3-4.jpg"
+                             alt="Just another beautiful memory">
 
-            }, 5200);
+                        <p>
+                            Just another beautiful memory.
+                        </p>
 
-        }, i * 250);
+                    </div>
 
-    }
 
-}
 
+                    <!-- PHOTO 5 -->
 
-/* ================================
-   FLOATING ROSE PETALS + HEARTS
-================================ */
+                    <div class="photo-card">
 
-function startFloatingParticles() {
+                        <img src="images/chapter3-5.jpg"
+                             alt="A little moment worth keeping forever">
 
-    if (particleInterval) {
+                        <p>
+                            A little moment worth keeping forever.
+                        </p>
 
-        return;
+                    </div>
 
-    }
 
-    particleInterval =
-        setInterval(
-            createFloatingParticle,
-            900
-        );
+                </div>
 
-}
 
 
-function createFloatingParticle() {
+                <!-- ================================
+                     CHAPTER 3 MESSAGE
+                ================================= -->
 
-    const particle =
-        document.createElement("div");
+                <div class="memory-message">
 
-    const particles = [
-        "♡",
-        "♥",
-        "✿",
-        "❀",
-        "·"
-    ];
+                    <h2>
+                        What are you looking at? 😂
+                    </h2>
 
-    particle.innerHTML =
-        particles[
-            Math.floor(
-                Math.random() *
-                particles.length
-            )
-        ];
+                    <p>
+                        Oh… my favourite moments with you. ❤️
+                    </p>
 
+                    <p>
+                        Every single second I spend with you is my favourite.
+                    </p>
 
-    particle.classList.add(
-        "floating-particle"
-    );
+                    <p>
+                        Everything about you is my favourite.
+                    </p>
 
+                    <p>
+                        And honestly, I can't confine it to just five pictures.
+                    </p>
 
-    particle.style.left =
-        Math.random() * 100 + "vw";
+                    <p>
+                        It would take an entire millennium to even write half of it. 😘
+                    </p>
 
-    particle.style.bottom =
-        "-30px";
+                </div>
 
-    particle.style.fontSize =
-        Math.random() * 18 + 10 + "px";
 
-    particle.style.color =
-        Math.random() > 0.5
-            ? "#b76e79"
-            : "#d9a0a8";
+            </div>
 
-    particle.style.animationDuration =
-        Math.random() * 4 + 5 + "s";
+        </section>
 
 
-    document.body.appendChild(particle);
+        <button class="teddy-btn"
+                type="button"
+                onclick="teddyTurnPage(this)">
 
+            <img src="teddy.gif"
+                 alt="Cute teddy">
 
-    setTimeout(() => {
+            <span>
+                Press me ❤️
+            </span>
 
-        particle.remove();
+        </button>
 
-    }, 10000);
 
-}
 
+        <!-- ================================
+             PAGE 4
+        ================================= -->
 
-/* ================================
-   FINAL HEART EXPLOSION
-================================ */
+        <section class="page">
 
-function createHeartExplosion() {
+            <div class="page-content">
 
-    const hearts = 22;
+                <p class="chapter">
+                    Chapter Four
+                </p>
 
-    for (let i = 0; i < hearts; i++) {
+                <h1>
+                    Things I love about you
+                </h1>
 
-        const heart =
-            document.createElement("div");
+                <div class="divider"></div>
 
-        heart.innerHTML =
-            Math.random() > 0.5
-                ? "♥"
-                : "♡";
 
-        heart.style.position = "fixed";
+                <div class="reasons">
 
-        heart.style.left = "50%";
 
-        heart.style.top = "50%";
+                    <div class="reason">
 
-        heart.style.fontSize =
-            Math.random() * 20 + 12 + "px";
+                        <span class="reason-number">
+                            01
+                        </span>
 
-        heart.style.color =
-            Math.random() > 0.5
-                ? "#b76e79"
-                : "#681f32";
+                        <span>
+                            Your smile.
+                        </span>
 
-        heart.style.pointerEvents = "none";
+                    </div>
 
-        heart.style.zIndex = "2000";
 
 
-        document.body.appendChild(heart);
+                    <div class="reason">
 
+                        <span class="reason-number">
+                            02
+                        </span>
 
-        const angle =
-            Math.random() * Math.PI * 2;
+                        <span>
+                            The way you make
+                            ordinary moments special.
+                        </span>
 
-        const distance =
-            Math.random() * 180 + 80;
+                    </div>
 
-        const x =
-            Math.cos(angle) * distance;
 
-        const y =
-            Math.sin(angle) * distance;
 
+                    <div class="reason">
 
-        heart.animate(
-            [
-                {
-                    transform:
-                        "translate(-50%, -50%) scale(0)",
+                        <span class="reason-number">
+                            03
+                        </span>
 
-                    opacity: 1
-                },
+                        <span>
+                            The way you make me feel
+                            understood.
+                        </span>
 
-                {
-                    transform:
-                        `translate(
-                            calc(-50% + ${x}px),
-                            calc(-50% + ${y}px)
-                        ) scale(1.2)`,
+                    </div>
 
-                    opacity: 0
-                }
-            ],
 
-            {
-                duration: 1800,
 
-                easing:
-                    "cubic-bezier(.17,.67,.35,1)"
-            }
-        );
+                    <div class="reason">
 
+                        <span class="reason-number">
+                            04
+                        </span>
 
-        setTimeout(() => {
+                        <span>
+                            Simply being you.
+                        </span>
 
-            heart.remove();
+                    </div>
 
-        }, 1300);
 
-    }
+                </div>
 
-}
+            </div>
 
+        </section>
 
-/* ================================
-   START
-================================ */
 
-showPage(0);
+        <button class="teddy-btn"
+                type="button"
+                onclick="teddyTurnPage(this)">
 
+            <img src="teddy.gif"
+                 alt="Cute teddy">
 
-/* ================================
-   REPLAY STORY
-================================ */
+            <span>
+                Press me ❤️
+            </span>
 
-function replayStory() {
+        </button>
 
-    currentPage = 0;
 
-    showPage(0);
 
-    window.scrollTo({
+        <!-- ================================
+             PAGE 5
+        ================================= -->
 
-        top: 0,
+        <section class="page">
 
-        behavior: "smooth"
+            <div class="page-content">
 
-    });
+                <p class="chapter">
+                    Chapter Five
+                </p>
 
-    createHearts();
+                <h1>
+                    If I could describe you
+                </h1>
 
-}
+                <div class="divider"></div>
 
+                <p>
 
-/* ================================
-   TEDDY PAGE TURN
-================================ */
+                    I'd run out of words
+                    before I could even get close.
 
-function teddyTurnPage(button) {
+                </p>
 
-    if (currentPage >= pages.length - 1) {
+                <p>
 
-        return;
+                    You're the kind of person
+                    who makes life feel warmer.
 
-    }
+                </p>
 
+                <p class="script">
+                    You feel like home.
+                </p>
 
-    /* Teddy happy animation */
+            </div>
 
-    button.classList.add(
-        "teddy-happy"
-    );
+        </section>
 
 
-    /* Create little hearts */
+        <button class="teddy-btn"
+                type="button"
+                onclick="teddyTurnPage(this)">
 
-    const rect =
-        button.getBoundingClientRect();
+            <img src="teddy.gif"
+                 alt="Cute teddy">
 
+            <span>
+                Press me ❤️
+            </span>
 
-    for (let i = 0; i < 6; i++) {
+        </button>
 
-        const heart =
-            document.createElement("div");
 
-        heart.className =
-            "teddy-heart";
 
-        heart.innerHTML =
-            Math.random() > 0.5
-                ? "❤️"
-                : "💕";
+        <!-- ================================
+             PAGE 6
+        ================================= -->
 
+        <section class="page">
 
-        heart.style.left =
-            rect.left +
-            rect.width / 2 +
-            "px";
+            <div class="page-content">
 
-        heart.style.top =
-            rect.top +
-            20 +
-            "px";
+                <p class="chapter">
+                    Chapter Six
+                </p>
 
+                <h1>
+                    The time we've shared
+                </h1>
 
-        heart.style.setProperty(
+                <div class="divider"></div>
 
-            "--x",
+                <p>
 
-            (Math.random() * 100 - 50) +
-            "px"
+                    Every conversation,
+                    every laugh,
+                    every little moment...
 
-        );
+                </p>
 
+                <p>
 
-        heart.style.setProperty(
+                    somehow became part
+                    of my favorite memories.
 
-            "--y",
+                </p>
 
-            (-Math.random() * 90 - 30) +
-            "px"
+                <p class="script">
 
-        );
+                    And I wouldn't trade
+                    any of them.
 
+                </p>
 
-        document.body.appendChild(
-            heart
-        );
+            </div>
 
+        </section>
 
-        setTimeout(() => {
 
-            heart.remove();
+        <button class="teddy-btn"
+                type="button"
+                onclick="teddyTurnPage(this)">
 
-        }, 1000);
+            <img src="teddy.gif"
+                 alt="Cute teddy">
 
-    }
+            <span>
+                Press me ❤️
+            </span>
 
+        </button>
 
-    /* Wait for teddy animation */
 
-    setTimeout(() => {
 
-        button.classList.remove(
-            "teddy-happy"
-        );
+        <!-- ================================
+             PAGE 7
+        ================================= -->
 
-        nextPage();
+        <section class="page">
 
-    }, 550);
+            <div class="page-content">
 
-}
+                <p class="chapter">
+                    Chapter Seven
+                </p>
 
+                <h1>
+                    How much I love you
+                </h1>
 
-/* ================================
-   BIRTHDAY LOCK
-================================ */
+                <div class="divider"></div>
 
-function unlockBook() {
+                <p>
+                    More than I know how to explain.
+                </p>
 
-    const day =
-        document.getElementById(
-            "birthDay"
-        ).value;
+                <p>
+                    More than a number could measure.
+                </p>
 
-    const month =
-        document.getElementById(
-            "birthMonth"
-        ).value;
+                <p>
+                    More than these pages could ever hold.
+                </p>
 
-    const year =
-        document.getElementById(
-            "birthYear"
-        ).value;
+                <p class="script">
 
-    const error =
-        document.getElementById(
-            "lockError"
-        );
+                    Simply...
+                    a lot.
+                    ❤️
 
-    const lock =
-        document.getElementById(
-            "birthdayLock"
-        );
+                </p>
 
+            </div>
 
-    if (
+        </section>
 
-        Number(day) === 22 &&
 
-        Number(month) === 9 &&
+        <button class="teddy-btn"
+                type="button"
+                onclick="teddyTurnPage(this)">
 
-        Number(year) === 2010
+            <img src="teddy.gif"
+                 alt="Cute teddy">
 
-    ) {
+            <span>
+                Press me ❤️
+            </span>
 
-        error.textContent = "";
+        </button>
 
-        lock.classList.add(
-            "unlocking"
-        );
 
 
-        setTimeout(() => {
+        <!-- ================================
+             PAGE 8
+        ================================= -->
 
-            lock.style.display =
-                "none";
+        <section class="page">
 
-        }, 1000);
+            <div class="page-content">
 
+                <p class="chapter">
+                    Chapter Eight
+                </p>
 
-    } else {
+                <h1>
+                    A little promise
+                </h1>
 
-        error.textContent =
-            "Hmm... that's not the birthday I'm looking for. ❤️";
+                <div class="divider"></div>
 
+                <p>
 
-        lock.classList.remove(
-            "wrong"
-        );
+                    I'll keep choosing you
+                    through the good days,
+                    the difficult days,
+                    and everything between.
 
+                </p>
 
-        void lock.offsetWidth;
+                <p>
 
+                    I'll keep making memories
+                    with you.
 
-        lock.classList.add(
-            "wrong"
-        );
+                </p>
 
-    }
+                <p class="script">
+                    One day at a time.
+                </p>
 
-}
+            </div>
 
+        </section>
 
-/* ================================
-   RESTART ENTIRE BOOK
-================================ */
 
-function restartBook() {
+        <button class="teddy-btn"
+                type="button"
+                onclick="teddyTurnPage(this)">
 
-    /* Reset page */
+            <img src="teddy.gif"
+                 alt="Cute teddy">
 
-    currentPage = 0;
+            <span>
+                Press me ❤️
+            </span>
 
+        </button>
 
-    /* Stop Chapter 3 animation */
 
-    if (chapter3Interval) {
 
-        clearInterval(
-            chapter3Interval
-        );
+        <!-- ================================
+             PAGE 9
+        ================================= -->
 
-        chapter3Interval = null;
+        <section class="page">
 
-    }
+            <div class="page-content">
 
+                <p class="chapter">
+                    Chapter Nine
+                </p>
 
-    /* Hide every page */
+                <h1>
+                    Before the ending...
+                </h1>
 
-    pages.forEach((page) => {
+                <div class="divider"></div>
 
-        page.classList.remove(
-            "active"
-        );
+                <p>
 
-    });
+                    There's one more thing
+                    I need to ask you.
 
+                </p>
 
-    /* Reset Chapter 3 photos */
+                <p>
 
-    const cards =
-        document.querySelectorAll(
-            ".photo-grid .photo-card"
-        );
+                    Something I've secretly
+                    imagined for a long time.
 
+                </p>
 
-    cards.forEach((card) => {
+                <p class="script">
+                    Turn the page. ❤️
+                </p>
 
-        card.classList.remove(
-            "show-photo"
-        );
+            </div>
 
-    });
+        </section>
 
 
-    /* Reset Chapter 3 message */
+        <button class="teddy-btn"
+                type="button"
+                onclick="teddyTurnPage(this)">
 
-    const memoryMessage =
-        document.querySelector(
-            ".memory-message"
-        );
+            <img src="teddy.gif"
+                 alt="Cute teddy">
 
+            <span>
+                Press me ❤️
+            </span>
 
-    if (memoryMessage) {
+        </button>
 
-        memoryMessage.classList.remove(
-            "show-message"
-        );
 
-    }
 
+        <!-- ================================
+             PAGE 10
+        ================================= -->
 
-    /* Reset opening screen */
+        <section class="page question-page">
 
-    openingScreen.classList.remove(
-        "hidden"
-    );
+            <div class="page-content">
 
+                <p class="chapter">
+                    Chapter Ten
+                </p>
 
-    /* Show birthday lock again */
+                <div class="ring">
+                    💍
+                </div>
 
-    const lock =
-        document.getElementById(
-            "birthdayLock"
-        );
+                <p class="question-intro">
 
+                    There's something I've wanted
+                    to ask you...
 
-    if (lock) {
+                </p>
 
-        lock.style.display =
-            "flex";
+                <div class="question">
 
-        lock.classList.remove(
-            "unlocking"
-        );
+                    Will you break up with me...
 
-        lock.classList.remove(
-            "wrong"
-        );
+                </div>
 
-    }
+                <p class="question-text">
 
+                    Not because I stopped loving you.
 
-    /* Clear birthday inputs */
+                    <br>
 
-    const day =
-        document.getElementById(
-            "birthDay"
-        );
+                    But because I want our story
+                    to become something even
+                    more beautiful.
 
-    const month =
-        document.getElementById(
-            "birthMonth"
-        );
+                </p>
 
-    const year =
-        document.getElementById(
-            "birthYear"
-        );
+                <div class="final-question">
 
-    const error =
-        document.getElementById(
-            "lockError"
-        );
+                    ...and become my wife instead? ❤️
 
+                </div>
 
-    if (day) {
+                <p class="question-text">
 
-        day.value = "";
+                    I know we still have so much
+                    life ahead of us.
 
-    }
+                    <br><br>
 
-    if (month) {
+                    But if I get to choose
+                    who I spend it with...
 
-        month.value = "";
+                    <br>
 
-    }
+                    <strong>
+                        I'd choose you.
+                    </strong>
 
-    if (year) {
+                    ❤️
 
-        year.value = "";
+                </p>
 
-    }
+            </div>
 
-    if (error) {
+        </section>
 
-        error.textContent = "";
 
-    }
+        <button class="teddy-btn"
+                type="button"
+                onclick="teddyTurnPage(this)">
 
+            <img src="teddy.gif"
+                 alt="Cute teddy">
 
-    /* Scroll to top */
+            <span>
+                Press me ❤️
+            </span>
 
-    window.scrollTo({
+        </button>
 
-        top: 0,
 
-        behavior: "smooth"
 
-    });
+        <!-- ================================
+             PAGE 11
+        ================================= -->
 
-}
+        <section class="page final-page">
 
+            <div class="final-heart">
+                ♥
+            </div>
 
-/* ================================
-   MUSIC TOGGLE
-================================ */
+            <p class="final-whisper">
+                And if you ever wonder...
+            </p>
 
-function toggleMusic() {
+            <h1 class="final-title">
+                How much I love you
+            </h1>
 
-    if (!bgMusic) {
+            <div class="final-divider"></div>
 
-        return;
+            <p class="final-message">
 
-    }
+                There aren't enough words.
 
+                <br>
 
-    if (bgMusic.paused) {
+                There aren't enough stars.
 
-        bgMusic.play();
+                <br>
 
-        if (musicToggle) {
+                There isn't enough time.
 
-            musicToggle.classList.add(
-                "playing"
-            );
+            </p>
 
-            musicToggle.textContent =
-                "🎵";
+            <p class="final-promise">
 
-        }
+                But if I had forever...
 
+                <br>
 
-    } else {
+                <strong>
+                    I'd still choose you.
+                </strong>
 
-        bgMusic.pause();
+            </p>
 
-        if (musicToggle) {
+            <div class="final-birthday">
 
-            musicToggle.classList.remove(
-                "playing"
-            );
+                Happy Birthday, Aaishani ❤️
 
-            musicToggle.textContent =
-                "🔇";
+            </div>
 
-        }
+            <div class="final-signature">
 
-    }
+                Forever yours,
 
-}
+                <br>
 
+                <span>
+                    Shourya ❤️
+                </span>
 
-/* ================================
-   CHAPTER 3 MEMORY PHOTO REVEAL
-================================ */
+            </div>
 
-function startChapter3Slideshow() {
 
-    const cards =
-        document.querySelectorAll(
-            ".photo-grid .photo-card"
-        );
+            <button class="restart-btn"
+                    type="button"
+                    onclick="restartBook()">
 
+                ↻ Read our story again ❤️
 
-    if (!cards.length) {
+            </button>
 
-        return;
+        </section>
 
-    }
 
+    </main>
 
-    /* Stop previous animation */
 
-    if (chapter3Interval) {
 
-        clearInterval(
-            chapter3Interval
-        );
+    <!-- ================================
+         JAVASCRIPT
+    ================================= -->
 
-    }
+    <script src="main.js"></script>
 
 
-    /* Reset all photos */
+</body>
 
-    cards.forEach((card) => {
-
-        card.classList.remove(
-            "show-photo"
-        );
-
-    });
-
-
-    /* Reset memory message */
-
-    const message =
-        document.querySelector(
-            ".memory-message"
-        );
-
-
-    if (message) {
-
-        message.classList.remove(
-            "show-message"
-        );
-
-    }
-
-
-    let currentPhoto = 0;
-
-
-    /* First photo appears */
-
-    cards[0].classList.add(
-        "show-photo"
-    );
-
-
-    currentPhoto = 1;
-
-
-    /* Reveal next photo */
-
-    chapter3Interval =
-        setInterval(() => {
-
-
-            if (
-                currentPhoto >=
-                cards.length
-            ) {
-
-                clearInterval(
-                    chapter3Interval
-                );
-
-                chapter3Interval = null;
-
-
-                /* Wait 1 second after
-                   the fifth card appears */
-
-                setTimeout(() => {
-
-                    const memoryMessage =
-                        document.querySelector(
-                            ".memory-message"
-                        );
-
-
-                    if (memoryMessage) {
-
-                        memoryMessage.classList.add(
-                            "show-message"
-                        );
-
-                    }
-
-                }, 1000);
-
-
-                return;
-
-            }
-
-
-            cards[currentPhoto]
-                .classList.add(
-                    "show-photo"
-                );
-
-
-            currentPhoto++;
-
-
-        }, 2500);
-
-}
+</html>
