@@ -1,15 +1,61 @@
 let currentPage = 0;
 
-const pages = document.querySelectorAll(".page");
-const pageNumber = document.getElementById("pageNumber");
-const prevBtn = document.getElementById("prevBtn");
-const nextBtn = document.getElementById("nextBtn");
-const openingScreen = document.getElementById("openingScreen");
-const bgMusic = document.getElementById("bgMusic");
-const musicToggle = document.getElementById("musicToggle");
+let pages = [];
+let pageNumber = null;
+let prevBtn = null;
+let nextBtn = null;
+let openingScreen = null;
+let bgMusic = null;
+let musicToggle = null;
 
-let particleInterval;
+let particleInterval = null;
 let chapter3Interval = null;
+
+
+/* ================================
+   INITIALIZE
+================================ */
+
+function initializeBook() {
+
+    pages = document.querySelectorAll(".page");
+
+    pageNumber =
+        document.getElementById("pageNumber");
+
+    prevBtn =
+        document.getElementById("prevBtn");
+
+    nextBtn =
+        document.getElementById("nextBtn");
+
+    openingScreen =
+        document.getElementById("openingScreen");
+
+    bgMusic =
+        document.getElementById("bgMusic");
+
+    musicToggle =
+        document.getElementById("musicToggle");
+
+
+    /* Show first page behind opening screen */
+
+    if (pages.length > 0) {
+
+        pages.forEach((page) => {
+            page.classList.remove("active");
+        });
+
+        pages[0].classList.add("active");
+
+        currentPage = 0;
+
+    }
+
+    updateNavigation();
+
+}
 
 
 /* ================================
@@ -18,9 +64,38 @@ let chapter3Interval = null;
 
 function openBook() {
 
-    openingScreen.classList.add("hidden");
+    console.log("Open Book button clicked");
 
-    /* Start background music */
+
+    /* Hide opening screen */
+
+    if (openingScreen) {
+
+        openingScreen.classList.add("hidden");
+
+    }
+
+
+    /* Make absolutely sure Page 1 appears */
+
+    if (pages.length > 0) {
+
+        pages.forEach((page) => {
+
+            page.classList.remove("active");
+
+        });
+
+        pages[0].classList.add("active");
+
+        currentPage = 0;
+
+        updateNavigation();
+
+    }
+
+
+    /* Start music */
 
     if (bgMusic) {
 
@@ -30,22 +105,34 @@ function openBook() {
             .then(() => {
 
                 if (musicToggle) {
-                    musicToggle.classList.add("playing");
-                    musicToggle.textContent = "🎵";
+
+                    musicToggle.classList.add(
+                        "playing"
+                    );
+
+                    musicToggle.textContent =
+                        "🎵";
+
                 }
 
             })
             .catch(() => {
 
-                console.log("Music needs user interaction.");
+                console.log(
+                    "Music needs user interaction."
+                );
 
             });
 
     }
 
+
+    /* Start floating effects */
+
     setTimeout(() => {
 
         createHearts();
+
         startFloatingParticles();
 
     }, 700);
@@ -59,46 +146,34 @@ function openBook() {
 
 function showPage(index) {
 
-    if (index < 0 || index >= pages.length) {
-        return;
-    }
-
-    const oldPage = pages[currentPage];
-    const newPage = pages[index];
-
-
-    /* First page — show immediately */
-
     if (
-        currentPage === index &&
-        !newPage.classList.contains("active")
+        !pages ||
+        pages.length === 0
     ) {
 
-        newPage.classList.add("active");
+        return;
 
-        currentPage = index;
+    }
 
-        updateNavigation();
+
+    if (
+        index < 0 ||
+        index >= pages.length
+    ) {
 
         return;
+
     }
+
+
+    const oldPage =
+        pages[currentPage];
+
+    const newPage =
+        pages[index];
 
 
     if (oldPage === newPage) {
-        return;
-    }
-
-
-    /* Fade out old page */
-
-    if (oldPage) {
-        oldPage.classList.remove("active");
-    }
-
-
-    /* Fade in new page */
-
-    setTimeout(() => {
 
         newPage.classList.add("active");
 
@@ -106,23 +181,54 @@ function showPage(index) {
 
         updateNavigation();
 
+        return;
 
-        /* ================================
-           CHAPTER 3 PHOTO REVEAL
-        ================================= */
+    }
 
-        if (newPage.querySelector(".photo-grid")) {
+
+    /* Hide old page */
+
+    if (oldPage) {
+
+        oldPage.classList.remove(
+            "active"
+        );
+
+    }
+
+
+    /* Show new page */
+
+    setTimeout(() => {
+
+        newPage.classList.add(
+            "active"
+        );
+
+        currentPage = index;
+
+        updateNavigation();
+
+
+        /* Chapter 3 */
+
+        if (
+            newPage.querySelector(
+                ".photo-grid"
+            )
+        ) {
 
             startChapter3Slideshow();
 
         }
 
 
-        /* ================================
-           FINAL PAGE EFFECTS
-        ================================= */
+        /* Final page */
 
-        if (index === pages.length - 1) {
+        if (
+            index ===
+            pages.length - 1
+        ) {
 
             setTimeout(() => {
 
@@ -161,9 +267,14 @@ function showPage(index) {
 
 function nextPage() {
 
-    if (currentPage < pages.length - 1) {
+    if (
+        currentPage <
+        pages.length - 1
+    ) {
 
-        showPage(currentPage + 1);
+        showPage(
+            currentPage + 1
+        );
 
     } else {
 
@@ -182,7 +293,9 @@ function previousPage() {
 
     if (currentPage > 0) {
 
-        showPage(currentPage - 1);
+        showPage(
+            currentPage - 1
+        );
 
     }
 
@@ -202,6 +315,7 @@ function updateNavigation() {
 
     }
 
+
     if (prevBtn) {
 
         prevBtn.disabled =
@@ -209,10 +323,12 @@ function updateNavigation() {
 
     }
 
+
     if (nextBtn) {
 
         nextBtn.disabled =
-            currentPage === pages.length - 1;
+            currentPage ===
+            pages.length - 1;
 
     }
 
@@ -223,21 +339,24 @@ function updateNavigation() {
    KEYBOARD CONTROLS
 ================================ */
 
-document.addEventListener("keydown", (event) => {
+document.addEventListener(
+    "keydown",
+    (event) => {
 
-    if (event.key === "ArrowRight") {
+        if (event.key === "ArrowRight") {
 
-        nextPage();
+            nextPage();
+
+        }
+
+        if (event.key === "ArrowLeft") {
+
+            previousPage();
+
+        }
 
     }
-
-    if (event.key === "ArrowLeft") {
-
-        previousPage();
-
-    }
-
-});
+);
 
 
 /* ================================
@@ -248,22 +367,28 @@ let touchStartX = 0;
 let touchEndX = 0;
 
 
-document.addEventListener("touchstart", (event) => {
+document.addEventListener(
+    "touchstart",
+    (event) => {
 
-    touchStartX =
-        event.changedTouches[0].screenX;
+        touchStartX =
+            event.changedTouches[0].screenX;
 
-});
+    }
+);
 
 
-document.addEventListener("touchend", (event) => {
+document.addEventListener(
+    "touchend",
+    (event) => {
 
-    touchEndX =
-        event.changedTouches[0].screenX;
+        touchEndX =
+            event.changedTouches[0].screenX;
 
-    handleSwipe();
+        handleSwipe();
 
-});
+    }
+);
 
 
 function handleSwipe() {
@@ -271,11 +396,15 @@ function handleSwipe() {
     const distance =
         touchEndX - touchStartX;
 
-    if (Math.abs(distance) < 60) {
+
+    if (
+        Math.abs(distance) < 60
+    ) {
 
         return;
 
     }
+
 
     if (distance < 0) {
 
@@ -298,24 +427,33 @@ function createHearts() {
 
     const heartCount = 18;
 
-    for (let i = 0; i < heartCount; i++) {
+
+    for (
+        let i = 0;
+        i < heartCount;
+        i++
+    ) {
 
         setTimeout(() => {
 
             const heart =
                 document.createElement("div");
 
+
             heart.innerHTML =
                 Math.random() > 0.5
                     ? "♥"
                     : "♡";
 
-            heart.style.position = "fixed";
+
+            heart.style.position =
+                "fixed";
 
             heart.style.left =
                 Math.random() * 100 + "vw";
 
-            heart.style.bottom = "-30px";
+            heart.style.bottom =
+                "-30px";
 
             heart.style.fontSize =
                 Math.random() * 15 + 10 + "px";
@@ -325,17 +463,22 @@ function createHearts() {
                     ? "#b76e79"
                     : "#681f32";
 
-            heart.style.opacity = "0.7";
+            heart.style.opacity =
+                "0.7";
 
-            heart.style.pointerEvents = "none";
+            heart.style.pointerEvents =
+                "none";
 
-            heart.style.zIndex = "999";
+            heart.style.zIndex =
+                "999";
 
             heart.style.transition =
                 "transform 5s linear, opacity 5s linear";
 
 
-            document.body.appendChild(heart);
+            document.body.appendChild(
+                heart
+            );
 
 
             setTimeout(() => {
@@ -343,7 +486,8 @@ function createHearts() {
                 heart.style.transform =
                     `translateY(-${window.innerHeight + 100}px)`;
 
-                heart.style.opacity = "0";
+                heart.style.opacity =
+                    "0";
 
             }, 100);
 
@@ -362,7 +506,7 @@ function createHearts() {
 
 
 /* ================================
-   FLOATING ROSE PETALS + HEARTS
+   FLOATING PARTICLES
 ================================ */
 
 function startFloatingParticles() {
@@ -372,6 +516,7 @@ function startFloatingParticles() {
         return;
 
     }
+
 
     particleInterval =
         setInterval(
@@ -387,6 +532,7 @@ function createFloatingParticle() {
     const particle =
         document.createElement("div");
 
+
     const particles = [
         "♡",
         "♥",
@@ -394,6 +540,7 @@ function createFloatingParticle() {
         "❀",
         "·"
     ];
+
 
     particle.innerHTML =
         particles[
@@ -427,7 +574,9 @@ function createFloatingParticle() {
         Math.random() * 4 + 5 + "s";
 
 
-    document.body.appendChild(particle);
+    document.body.appendChild(
+        particle
+    );
 
 
     setTimeout(() => {
@@ -440,28 +589,38 @@ function createFloatingParticle() {
 
 
 /* ================================
-   FINAL HEART EXPLOSION
+   HEART EXPLOSION
 ================================ */
 
 function createHeartExplosion() {
 
     const hearts = 22;
 
-    for (let i = 0; i < hearts; i++) {
+
+    for (
+        let i = 0;
+        i < hearts;
+        i++
+    ) {
 
         const heart =
             document.createElement("div");
+
 
         heart.innerHTML =
             Math.random() > 0.5
                 ? "♥"
                 : "♡";
 
-        heart.style.position = "fixed";
 
-        heart.style.left = "50%";
+        heart.style.position =
+            "fixed";
 
-        heart.style.top = "50%";
+        heart.style.left =
+            "50%";
+
+        heart.style.top =
+            "50%";
 
         heart.style.fontSize =
             Math.random() * 20 + 12 + "px";
@@ -471,25 +630,36 @@ function createHeartExplosion() {
                 ? "#b76e79"
                 : "#681f32";
 
-        heart.style.pointerEvents = "none";
+        heart.style.pointerEvents =
+            "none";
 
-        heart.style.zIndex = "2000";
+        heart.style.zIndex =
+            "2000";
 
 
-        document.body.appendChild(heart);
+        document.body.appendChild(
+            heart
+        );
 
 
         const angle =
-            Math.random() * Math.PI * 2;
+            Math.random() *
+            Math.PI *
+            2;
+
 
         const distance =
             Math.random() * 180 + 80;
 
+
         const x =
-            Math.cos(angle) * distance;
+            Math.cos(angle) *
+            distance;
+
 
         const y =
-            Math.sin(angle) * distance;
+            Math.sin(angle) *
+            distance;
 
 
         heart.animate(
@@ -511,7 +681,6 @@ function createHeartExplosion() {
                     opacity: 0
                 }
             ],
-
             {
                 duration: 1800,
 
@@ -525,18 +694,11 @@ function createHeartExplosion() {
 
             heart.remove();
 
-        }, 1300);
+        }, 1900);
 
     }
 
 }
-
-
-/* ================================
-   START
-================================ */
-
-showPage(0);
 
 
 /* ================================
@@ -547,7 +709,27 @@ function replayStory() {
 
     currentPage = 0;
 
-    showPage(0);
+
+    pages.forEach((page) => {
+
+        page.classList.remove(
+            "active"
+        );
+
+    });
+
+
+    if (pages[0]) {
+
+        pages[0].classList.add(
+            "active"
+        );
+
+    }
+
+
+    updateNavigation();
+
 
     window.scrollTo({
 
@@ -556,6 +738,7 @@ function replayStory() {
         behavior: "smooth"
 
     });
+
 
     createHearts();
 
@@ -568,92 +751,102 @@ function replayStory() {
 
 function teddyTurnPage(button) {
 
-    if (currentPage >= pages.length - 1) {
+    if (
+        currentPage >=
+        pages.length - 1
+    ) {
 
         return;
 
     }
 
 
-    /* Teddy happy animation */
+    if (button) {
 
-    button.classList.add(
-        "teddy-happy"
-    );
-
-
-    /* Create little hearts */
-
-    const rect =
-        button.getBoundingClientRect();
-
-
-    for (let i = 0; i < 6; i++) {
-
-        const heart =
-            document.createElement("div");
-
-        heart.className =
-            "teddy-heart";
-
-        heart.innerHTML =
-            Math.random() > 0.5
-                ? "❤️"
-                : "💕";
-
-
-        heart.style.left =
-            rect.left +
-            rect.width / 2 +
-            "px";
-
-        heart.style.top =
-            rect.top +
-            20 +
-            "px";
-
-
-        heart.style.setProperty(
-
-            "--x",
-
-            (Math.random() * 100 - 50) +
-            "px"
-
+        button.classList.add(
+            "teddy-happy"
         );
-
-
-        heart.style.setProperty(
-
-            "--y",
-
-            (-Math.random() * 90 - 30) +
-            "px"
-
-        );
-
-
-        document.body.appendChild(
-            heart
-        );
-
-
-        setTimeout(() => {
-
-            heart.remove();
-
-        }, 1000);
 
     }
 
 
-    /* Wait for teddy animation */
+    if (button) {
+
+        const rect =
+            button.getBoundingClientRect();
+
+
+        for (
+            let i = 0;
+            i < 6;
+            i++
+        ) {
+
+            const heart =
+                document.createElement("div");
+
+
+            heart.className =
+                "teddy-heart";
+
+
+            heart.innerHTML =
+                Math.random() > 0.5
+                    ? "❤️"
+                    : "💕";
+
+
+            heart.style.left =
+                rect.left +
+                rect.width / 2 +
+                "px";
+
+
+            heart.style.top =
+                rect.top +
+                20 +
+                "px";
+
+
+            heart.style.setProperty(
+                "--x",
+                (Math.random() * 100 - 50) +
+                "px"
+            );
+
+
+            heart.style.setProperty(
+                "--y",
+                (-Math.random() * 90 - 30) +
+                "px"
+            );
+
+
+            document.body.appendChild(
+                heart
+            );
+
+
+            setTimeout(() => {
+
+                heart.remove();
+
+            }, 1000);
+
+        }
+
+    }
+
 
     setTimeout(() => {
 
-        button.classList.remove(
-            "teddy-happy"
-        );
+        if (button) {
+
+            button.classList.remove(
+                "teddy-happy"
+            );
+
+        }
 
         nextPage();
 
@@ -671,17 +864,17 @@ function unlockBook() {
     const day =
         document.getElementById(
             "birthDay"
-        ).value;
+        );
 
     const month =
         document.getElementById(
             "birthMonth"
-        ).value;
+        );
 
     const year =
         document.getElementById(
             "birthYear"
-        ).value;
+        );
 
     const error =
         document.getElementById(
@@ -695,16 +888,33 @@ function unlockBook() {
 
 
     if (
+        !day ||
+        !month ||
+        !year ||
+        !lock
+    ) {
 
-        Number(day) === 22 &&
+        return;
 
-        Number(month) === 9 &&
+    }
 
-        Number(year) === 2010
+
+    if (
+
+        Number(day.value) === 22 &&
+
+        Number(month.value) === 9 &&
+
+        Number(year.value) === 2010
 
     ) {
 
-        error.textContent = "";
+        if (error) {
+
+            error.textContent = "";
+
+        }
+
 
         lock.classList.add(
             "unlocking"
@@ -716,13 +926,17 @@ function unlockBook() {
             lock.style.display =
                 "none";
 
-        }, 1000);
+        }, 800);
 
 
     } else {
 
-        error.textContent =
-            "Hmm... that's not the birthday I'm looking for. ❤️";
+        if (error) {
+
+            error.textContent =
+                "Hmm... that's not the birthday I'm looking for. ❤️";
+
+        }
 
 
         lock.classList.remove(
@@ -748,12 +962,10 @@ function unlockBook() {
 
 function restartBook() {
 
-    /* Reset page */
-
     currentPage = 0;
 
 
-    /* Stop Chapter 3 animation */
+    /* Stop Chapter 3 */
 
     if (chapter3Interval) {
 
@@ -766,7 +978,7 @@ function restartBook() {
     }
 
 
-    /* Hide every page */
+    /* Hide all pages */
 
     pages.forEach((page) => {
 
@@ -777,7 +989,7 @@ function restartBook() {
     });
 
 
-    /* Reset Chapter 3 photos */
+    /* Reset photos */
 
     const cards =
         document.querySelectorAll(
@@ -794,7 +1006,7 @@ function restartBook() {
     });
 
 
-    /* Reset Chapter 3 message */
+    /* Reset memory message */
 
     const memoryMessage =
         document.querySelector(
@@ -813,12 +1025,16 @@ function restartBook() {
 
     /* Reset opening screen */
 
-    openingScreen.classList.remove(
-        "hidden"
-    );
+    if (openingScreen) {
+
+        openingScreen.classList.remove(
+            "hidden"
+        );
+
+    }
 
 
-    /* Show birthday lock again */
+    /* Reset birthday lock */
 
     const lock =
         document.getElementById(
@@ -842,7 +1058,7 @@ function restartBook() {
     }
 
 
-    /* Clear birthday inputs */
+    /* Clear birthday fields */
 
     const day =
         document.getElementById(
@@ -865,32 +1081,28 @@ function restartBook() {
         );
 
 
-    if (day) {
+    if (day) day.value = "";
 
-        day.value = "";
+    if (month) month.value = "";
 
-    }
+    if (year) year.value = "";
 
-    if (month) {
+    if (error) error.textContent = "";
 
-        month.value = "";
 
-    }
+    /* Show first page again */
 
-    if (year) {
+    if (pages[0]) {
 
-        year.value = "";
-
-    }
-
-    if (error) {
-
-        error.textContent = "";
+        pages[0].classList.add(
+            "active"
+        );
 
     }
 
 
-    /* Scroll to top */
+    updateNavigation();
+
 
     window.scrollTo({
 
@@ -918,23 +1130,28 @@ function toggleMusic() {
 
     if (bgMusic.paused) {
 
-        bgMusic.play();
+        bgMusic.play()
+            .then(() => {
 
-        if (musicToggle) {
+                if (musicToggle) {
 
-            musicToggle.classList.add(
-                "playing"
-            );
+                    musicToggle.classList.add(
+                        "playing"
+                    );
 
-            musicToggle.textContent =
-                "🎵";
+                    musicToggle.textContent =
+                        "🎵";
 
-        }
+                }
+
+            })
+            .catch(() => {});
 
 
     } else {
 
         bgMusic.pause();
+
 
         if (musicToggle) {
 
@@ -953,7 +1170,7 @@ function toggleMusic() {
 
 
 /* ================================
-   CHAPTER 3 MEMORY PHOTO REVEAL
+   CHAPTER 3 MEMORY REVEAL
 ================================ */
 
 function startChapter3Slideshow() {
@@ -971,18 +1188,18 @@ function startChapter3Slideshow() {
     }
 
 
-    /* Stop previous animation */
-
     if (chapter3Interval) {
 
         clearInterval(
             chapter3Interval
         );
 
+        chapter3Interval = null;
+
     }
 
 
-    /* Reset all photos */
+    /* Reset cards */
 
     cards.forEach((card) => {
 
@@ -993,7 +1210,7 @@ function startChapter3Slideshow() {
     });
 
 
-    /* Reset memory message */
+    /* Reset message */
 
     const message =
         document.querySelector(
@@ -1013,7 +1230,7 @@ function startChapter3Slideshow() {
     let currentPhoto = 0;
 
 
-    /* First photo appears */
+    /* First card */
 
     cards[0].classList.add(
         "show-photo"
@@ -1023,11 +1240,10 @@ function startChapter3Slideshow() {
     currentPhoto = 1;
 
 
-    /* Reveal next photo */
+    /* Remaining cards */
 
     chapter3Interval =
         setInterval(() => {
-
 
             if (
                 currentPhoto >=
@@ -1041,8 +1257,7 @@ function startChapter3Slideshow() {
                 chapter3Interval = null;
 
 
-                /* Wait 1 second after
-                   the fifth card appears */
+                /* Show message after fifth card */
 
                 setTimeout(() => {
 
@@ -1076,7 +1291,20 @@ function startChapter3Slideshow() {
 
             currentPhoto++;
 
-
         }, 2500);
 
 }
+
+
+/* ================================
+   START AFTER HTML LOADS
+================================ */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        initializeBook();
+
+    }
+);
